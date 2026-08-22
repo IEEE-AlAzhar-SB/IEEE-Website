@@ -1,3 +1,5 @@
+import { throwIfNotOk } from "../lib/apiError";
+
 interface Committee {
   _id: string;
   name: string;
@@ -19,7 +21,7 @@ export interface GroupedCommitteesResponse {
 
 export const getCommittees = async (): Promise<GroupedCommitteesResponse> => {
   const res = await fetch(`/api/v1/committees`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  await throwIfNotOk(res);
   const json = await res.json();
   return json.data ?? json;
 };

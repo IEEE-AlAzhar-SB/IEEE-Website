@@ -1,3 +1,5 @@
+import { throwIfNotOk } from "../lib/apiError";
+
 interface Speaker {
   name: string;
   title: string;
@@ -22,18 +24,19 @@ export interface SanityEvent {
   coverImage?: Image;
   speakers?: Speaker[];
   memories?: { photo: Image }[];
+  formSlug?: string | null;
 }
 
 export const getEvents = async (): Promise<SanityEvent[]> => {
   const res = await fetch(`/api/v1/events`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  await throwIfNotOk(res);
   const json = await res.json();
   return (json.data ?? json) as SanityEvent[];
 };
 
 export const getEventById = async (id: string): Promise<SanityEvent> => {
   const res = await fetch(`/api/v1/events/${id}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  await throwIfNotOk(res);
   const json = await res.json();
   return (json.data ?? json) as SanityEvent;
 };
