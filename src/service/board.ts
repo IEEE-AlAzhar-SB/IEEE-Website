@@ -18,9 +18,11 @@ interface DeleteMemberDTO {
 
 interface UpdateMemberDTO extends CreateMemberDTO, DeleteMemberDTO {}
 
+export type MemberType = "officers" | "operation" | "technical" | "branding";
+
 export interface BoardMetaResponse {
-  memberTypes: string[];
-  genders: string[];
+  memberTypes: MemberType[];
+  genders: ("male" | "female")[];
   allowedPositionsByType: Record<string, string[]>;
   allowedTracksByType: Record<string, string[]>;
   technicalTrackGroups: Record<string, string[]>;

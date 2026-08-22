@@ -1,3 +1,5 @@
+import { throwIfNotOk } from "../lib/apiError";
+
 interface HomePageData {
   home_images: { image: { asset: { url: string } } }[];
 }
@@ -10,7 +12,7 @@ export interface HeroSectionImage {
 
 export const getHomePageData = async (): Promise<HeroSectionImage[]> => {
   const res = await fetch(`/api/v1/home`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  await throwIfNotOk(res);
   const json = await res.json();
   return fillTheArray(json.data);
 };
