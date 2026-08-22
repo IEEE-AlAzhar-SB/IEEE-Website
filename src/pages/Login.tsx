@@ -121,7 +121,7 @@ function Login() {
                   value={credentials.email}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 bg-[#0F172A] border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition text-sm"
-                  placeholder="admin@ieeeazhar.org"
+                  placeholder="you@example.com"
                 />
               </div>
             </div>
