@@ -48,6 +48,13 @@ export const queryKeys = {
   home: {
     all: ["home"] as const,
   },
+  forms: {
+    all: ["forms"] as const,
+    bySlug: (slug: string) => ["forms", slug] as const,
+    publicBySlug: (slug: string) => ["forms", "public", slug] as const,
+    submissions: (slug: string) => ["forms", slug, "submissions"] as const,
+    export: (slug: string) => ["forms", slug, "export"] as const,
+  },
 };
 
 // helper removed (normalized inline in builder)

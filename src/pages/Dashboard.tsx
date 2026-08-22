@@ -6,6 +6,8 @@ import { LuShieldCheck, LuMenu } from "react-icons/lu";
 import { FeedbackDashboard } from "../pages";
 import { SideBarContent } from "../components";
 import { signOut } from "../lib/auth-client";
+import FormsDashboard from "./FormsDashboard";
+import FormDetailDashboard from "./FormDetailDashboard";
 import {
   useBoardMembers,
   CurrentMemberFormState,
@@ -285,6 +287,8 @@ function Dashboard() {
               }
             />
             <Route path="/feedback" element={<FeedbackDashboard />} />
+            <Route path="/forms" element={<FormsDashboard />} />
+            <Route path="/forms/:slug" element={<FormDetailDashboard />} />
           </Routes>
         </div>
       </div>
