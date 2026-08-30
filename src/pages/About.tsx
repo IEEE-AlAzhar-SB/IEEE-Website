@@ -217,6 +217,7 @@ const About = () => {
                   text={selectMemberPosition(chairPerson, chairPerson.gender)}
                   imageSrc={chairPerson.image_url}
                   linkedinLink={chairPerson.linkedin_url}
+                  publicId={chairPerson.image_public_id}
                 />
               ))}
             />

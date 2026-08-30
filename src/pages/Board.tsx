@@ -46,7 +46,7 @@ const Board = () => {
 
     return (
       <Fragment key={title}>
-        <div className="py-1 mt-6">
+        <div className="py-1 mt-6 px-4 sm:px-6">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 capitalize">
             <span className="bg-red-600 text-white px-2 py-1 rounded-r-full">
               {title}
@@ -69,7 +69,7 @@ const Board = () => {
     return (
       <Fragment key={mainTitle}>
         {/* Main Technical Section Header */}
-        <div className="py-1 mt-6">
+        <div className="py-1 mt-6 px-4 sm:px-6">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 capitalize">
             <span className="bg-red-600 text-white px-2 py-1 rounded-r-full">
               {mainTitle}
@@ -114,6 +114,7 @@ const Board = () => {
             text={position}
             imageSrc={member.image_url}
             linkedinLink={member.linkedin_url}
+            publicId={member.image_public_id}
           />
         );
       })}

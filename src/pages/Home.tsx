@@ -303,17 +303,18 @@ const Home = () => {
       </div>
 
       <div className="mt-6 mb-16 mx-auto container">
-        <CardSlider
-          cards={officers.map((officer) => (
-            <Card
-              key={officer.id}
-              imageSrc={officer.image_url}
-              name={officer.name}
-              text={`${selectMemberPosition(officer, officers[0]?.gender)}`}
-              linkedinLink={officer.linkedin_url}
-            />
-          ))}
-        />
+          <CardSlider
+            cards={officers.map((officer) => (
+              <Card
+                key={officer.id}
+                imageSrc={officer.image_url}
+                name={officer.name}
+                text={`${selectMemberPosition(officer, officers[0]?.gender)}`}
+                linkedinLink={officer.linkedin_url}
+                publicId={officer.image_public_id}
+              />
+            ))}
+          />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { FiEdit3, FiTrash2 } from "react-icons/fi";
-import { ErrorBanner, TableSkeleton } from "../../../components";
+import { ErrorBanner, TableSkeleton, CloudinaryImage } from "../../../components";
 import { BoardMember } from "../hooks/useBoardMembers";
 
 interface MemberTableProps {
@@ -60,14 +60,23 @@ const MemberTable = ({
                     className="hover:bg-slate-800/40 transition"
                   >
                     <td className="py-4 px-6 flex items-center gap-3">
-                      <img
-                        src={
-                          member.image_url ||
-                          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
-                        }
-                        alt={member.name}
-                        className="w-9 h-9 rounded-full object-cover border border-slate-600"
-                      />
+                      {member.image_public_id ? (
+                        <CloudinaryImage
+                          publicId={member.image_public_id}
+                          sizes="36px"
+                          alt={member.name}
+                          className="w-9 h-9 rounded-full object-cover border border-slate-600"
+                        />
+                      ) : (
+                        <img
+                          src={
+                            member.image_url ||
+                            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+                          }
+                          alt={member.name}
+                          className="w-9 h-9 rounded-full object-cover border border-slate-600"
+                        />
+                      )}
                       <span className="font-semibold text-white">
                         {member.name}
                       </span>

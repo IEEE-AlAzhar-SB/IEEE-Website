@@ -7,6 +7,7 @@ export interface BoardMember {
   track: string;
   gender: "male" | "female";
   image_url: string;
+  image_public_id?: string;
   linkedin_url: string;
 }
 
