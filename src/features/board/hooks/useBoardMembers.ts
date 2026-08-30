@@ -24,6 +24,7 @@ export interface BoardMember {
   linkedin_url?: string;
   boardYear?: number;
   image_url?: string;
+  image_public_id?: string;
 }
 
 export interface CurrentMemberFormState {
