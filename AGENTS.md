@@ -21,7 +21,7 @@ Frontend-only React SPA (Vite). The backend API lives in a separate repo ([`ieee
 
 ## Environment
 
-- Local dev needs a `.env` (gitignored, no `.env.example`) with both `VITE_BACKEND_URL` (dev proxy target) and `VITE_FRONTEND_URL` (better-auth baseURL). See `src/vite-env.d.ts` for the typed env shape. Always check/update `vite-env.d.ts` when adding new env vars.
+- Local dev needs a `.env` (gitignored, no `.env.example`) with `VITE_BACKEND_URL` (dev proxy target), `VITE_FRONTEND_URL` (better-auth baseURL), and `VITE_CLOUDINARY_CLOUD_NAME` (used by `CloudinaryImage`). See `src/vite-env.d.ts` for the typed env shape. Always check/update `vite-env.d.ts` when adding new env vars.
 - better-auth (`src/lib/auth-client.ts`) uses `basePath: "/api/auth"` and `credentials: "include"` (cookie-based). `VITE_FRONTEND_URL` must match the browser origin or auth cookies break.
 - In production `vercel.json` rewrites `/api/:path*` to the external backend and SPA-falls back all other routes to `/index.html`. Don't add backend routes here; they'd be rewritten.
 
@@ -29,7 +29,7 @@ Frontend-only React SPA (Vite). The backend API lives in a separate repo ([`ieee
 
 - Code mixes `.jsx` (App, main, some components/pages) and `.tsx`. `tsconfig` has `allowJs: true`; `typecheck` covers both.
 - Data flow: `src/service/*` (fetch layer) → `src/hooks/queries|mutations` (TanStack Query) → pages/features. Query keys live in `src/lib/queryKeys.ts`.
-- Service convention: check `res.ok` via `throwIfNotOk` from `src/lib/apiError.ts`, return `json.data ?? json` (a few older files, e.g. `service/events.ts`, skip `throwIfNotOk` — keep new code on the convention).
+- Service convention: check `res.ok` via `throwIfNotOk` from `src/lib/apiError.ts`, return `json.data ?? json`.
 - Mutations send `FormData` for board members (avatar as `avatar` field, omit empty optional fields like email/linkedin before appending).
 - Feature modules live in `src/features/*` (e.g. `board`, `feedback`, `forms`) each with `components/`, `hooks/`, and an `index.ts` barrel. The `forms` feature also has its own `service/` subdirectory — don't move feature-local service code into `src/service/`. Use feature-local `service/` for feature-specific API calls; use `src/service/` for shared/cross-feature endpoints. Dashboard uses `useBoardMembers` from `src/features/board`.
 - Routes (in `src/App.jsx`): public pages render inside a `/*` catch-all wrapper with `Navbar`/`Footer`; `/login` is standalone; `/dashboard/*` is wrapped in `ProtectedRoute` (better-auth session, redirects to `/login`) and has nested routes `/` (board members) and `/feedback`.
