@@ -54,7 +54,9 @@ const FormsTable = ({
     return (
       <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4 justify-between">
         <div className="flex items-center gap-3 text-red-400">
-          <p className="text-sm font-medium">{errorMessage || "Failed to load forms."}</p>
+          <p className="text-sm font-medium">
+            {errorMessage || "Failed to load forms."}
+          </p>
         </div>
         {onRetry && (
           <button
@@ -120,7 +122,10 @@ const FormsTable = ({
               <td className="py-4 px-6 text-sm text-slate-300">
                 {form.currentSubmissionCount}
                 {form.submissionLimit != null && (
-                  <span className="text-slate-500"> / {form.submissionLimit}</span>
+                  <span className="text-slate-500">
+                    {" "}
+                    / {form.submissionLimit}
+                  </span>
                 )}
               </td>
               <td className="py-4 px-6">

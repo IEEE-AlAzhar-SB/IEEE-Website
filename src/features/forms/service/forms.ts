@@ -26,7 +26,11 @@ export const getPublicForm = async (
 export const submitForm = async (
   slug: string,
   data: Record<string, unknown>,
-): Promise<{ formSlug: string; submitterEmail: string; submittedAt: string }> => {
+): Promise<{
+  formSlug: string;
+  submitterEmail: string;
+  submittedAt: string;
+}> => {
   const res = await fetch(`/api/v1/forms/${slug}/submissions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -53,9 +57,7 @@ export const listForms = async (): Promise<AdminFormDTO[]> => {
   return (json.data ?? json) as AdminFormDTO[];
 };
 
-export const getFormDetail = async (
-  slug: string,
-): Promise<AdminFormDTO> => {
+export const getFormDetail = async (slug: string): Promise<AdminFormDTO> => {
   const res = await fetch(`/api/v1/admin/forms/${slug}`, {
     credentials: "include",
   });
@@ -195,9 +197,7 @@ export const getSubmissions = async (
   return json.data ?? json;
 };
 
-export const getExportData = async (
-  slug: string,
-): Promise<ExportResponse> => {
+export const getExportData = async (slug: string): Promise<ExportResponse> => {
   const res = await fetch(`/api/v1/admin/forms/${slug}/submissions/export`, {
     credentials: "include",
   });

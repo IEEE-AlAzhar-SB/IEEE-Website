@@ -37,8 +37,9 @@ const EventDetails = () => {
         }
       />
 
-      <div className="w-fit px-4 py-6 relative top-[-45px] bg-white m-auto rounded-2xl shadow-md mx-3 sm:mx-5 md:mx-10 lg:mx-20">
-        <h2 className="flex flex-col text-center gap-2">
+      <div className="container mx-auto px-4 sm:px-6">
+      <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
+        <h2 className="flex flex-col items-start gap-2">
           <span
             className={`w-fit bg-blue-600 text-white px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
           >
@@ -51,7 +52,7 @@ const EventDetails = () => {
       </div>
 
       {event.speakers && event.speakers.length > 0 && (
-        <div className="my-10 px-6">
+        <div className="my-10">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
             <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
               Our Speaker
@@ -75,7 +76,7 @@ const EventDetails = () => {
         </div>
       )}
       {event.memories && event.memories.length > 0 && (
-        <div className="my-10 px-6">
+        <div className="my-10">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
             <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
               Moments That Inspire
@@ -106,6 +107,7 @@ const EventDetails = () => {
           <ExternalRegisterSection link={event.registrationLink} />
         )
       )}
+      </div>
     </div>
   );
 };
@@ -114,7 +116,7 @@ export default EventDetails;
 
 function ExternalRegisterSection({ link }: { link: string }) {
   return (
-    <div className="my-10 px-6 container mx-auto max-w-3xl">
+    <div className="my-10 w-full">
       <a
         href={link}
         target="_blank"
@@ -135,7 +137,7 @@ function EventFormSection({ formSlug }: { formSlug: string }) {
 
   if (isLoading) {
     return (
-      <div className="my-10 px-6 container mx-auto">
+      <div className="my-10 w-full">
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-gray-200 rounded w-48" />
           <div className="h-4 bg-gray-200 rounded w-96" />
@@ -151,8 +153,8 @@ function EventFormSection({ formSlug }: { formSlug: string }) {
   if (error || !form) return null;
 
   return (
-    <div className="my-10 px-6 container mx-auto max-w-3xl">
-      <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
+    <div className="my-10 w-full">
+      <h2 className="flex flex-col sm:flex-row items-center justify-center text-center text-lg sm:text-2xl font-bold gap-2 mb-8">
         <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
           Registration
         </span>

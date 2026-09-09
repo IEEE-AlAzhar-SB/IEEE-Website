@@ -114,7 +114,11 @@ export default function FieldBuilderModal({
     type === "radio" ||
     type === "checkbox" ||
     type === "committeeSelector";
-  const isTextType = type === "text" || type === "email" || type === "tel" || type === "textarea";
+  const isTextType =
+    type === "text" ||
+    type === "email" ||
+    type === "tel" ||
+    type === "textarea";
 
   const handleAddOption = () => {
     const trimmed = newOption.trim();

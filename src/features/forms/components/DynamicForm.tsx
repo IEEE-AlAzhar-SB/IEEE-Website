@@ -20,8 +20,8 @@ const buildInitialValues = (fields: FormField[]): Record<string, unknown> => {
 };
 
 const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
-  const [values, setValues] = useState<Record<string, unknown>>(
-    () => buildInitialValues(form.fields),
+  const [values, setValues] = useState<Record<string, unknown>>(() =>
+    buildInitialValues(form.fields),
   );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -206,11 +206,23 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
     return (
       <div className="text-center py-8">
         <div className="w-14 h-14 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/20">
-          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-7 h-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
-        <h3 className="text-lg font-bold text-gray-800 mb-2">Registration Successful!</h3>
+        <h3 className="text-lg font-bold text-gray-800 mb-2">
+          Registration Successful!
+        </h3>
         <p className="text-gray-600 text-sm">
           Thank you for registering. We'll be in touch soon.
         </p>
@@ -221,14 +233,25 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
   if (!form.submittable) {
     let message = "Registration is not available at this time.";
     if (form.status === "closed") message = "This registration is closed.";
-    else if (form.status === "draft") message = "This registration has not opened yet.";
+    else if (form.status === "draft")
+      message = "This registration has not opened yet.";
     else if (form.capacityReached) message = "This registration is full.";
 
     return (
       <div className="text-center py-8">
         <div className="w-14 h-14 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/20">
-          <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            className="w-7 h-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         </div>
         <p className="text-gray-600 text-sm font-medium">{message}</p>
@@ -245,7 +268,8 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
         return (
           <div key={field.key}>
             <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
-              {field.label} {field.required && <span className="text-red-600">*</span>}
+              {field.label}{" "}
+              {field.required && <span className="text-red-600">*</span>}
             </label>
 
             {field.type === "textarea" ? (
@@ -268,7 +292,9 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
                 onChange={handleChange}
                 className={`${baseClass} bg-white`}
               >
-                <option value="">{field.placeholder || "Select an option"}</option>
+                <option value="">
+                  {field.placeholder || "Select an option"}
+                </option>
                 {field.options.map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
@@ -278,7 +304,10 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
             ) : field.type === "radio" ? (
               <div className="flex flex-col gap-2 mt-1">
                 {field.options.map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
+                  <label
+                    key={opt}
+                    className="flex items-center gap-2 text-sm text-gray-700"
+                  >
                     <input
                       type="radio"
                       name={field.key}
@@ -307,10 +336,15 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
             ) : field.type === "checkbox" ? (
               <div className="flex flex-col gap-2 mt-1">
                 {field.options.map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
+                  <label
+                    key={opt}
+                    className="flex items-center gap-2 text-sm text-gray-700"
+                  >
                     <input
                       type="checkbox"
-                      checked={((values[field.key] as string[]) ?? []).includes(opt)}
+                      checked={((values[field.key] as string[]) ?? []).includes(
+                        opt,
+                      )}
                       onChange={() => handleCheckboxChange(field.key, opt)}
                       className="text-[#05568D] focus:ring-[#05568D]/40 rounded"
                     />
@@ -348,7 +382,9 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
             )}
 
             {fieldErrors[field.key] && (
-              <p className="text-xs text-red-600 mt-1">{fieldErrors[field.key]}</p>
+              <p className="text-xs text-red-600 mt-1">
+                {fieldErrors[field.key]}
+              </p>
             )}
           </div>
         );
@@ -366,7 +402,11 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
           disabled={submitting || locked}
           className="bg-[#05568D] text-white px-8 py-2.5 rounded-full hover:bg-[#033e66] active:scale-95 transition-all duration-300 font-semibold shadow-md hover:shadow-lg w-full sm:w-auto disabled:opacity-50"
         >
-          {submitting ? "Submitting..." : locked ? "Registration Unavailable" : "Submit"}
+          {submitting
+            ? "Submitting..."
+            : locked
+              ? "Registration Unavailable"
+              : "Submit"}
         </button>
       </div>
     </form>

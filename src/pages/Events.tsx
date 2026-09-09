@@ -28,11 +28,16 @@ const Events = () => {
       {/* Events Grid Container */}
       <div className="px-4 sm:px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 gap-6 container mx-auto mb-12">
         {events?.map((event, index) => {
-          const isFifthItem = index % 4 === 0 && index > 0;
+          const count = events?.length ?? 0;
+          const isFirst = index === 0;
+          const isLast = index === count - 1;
+          const isOrphan =
+            isLast && (count - 1) % 2 === 1 && count > 1;
+          const isFullWidth = isFirst || isOrphan;
           return (
             <div
               key={event._id}
-              className={`${isFifthItem ? "md:col-span-2 flex justify-center w-full px-8" : ""}`}
+              className={`${isFullWidth ? "md:col-span-2 w-full" : ""}`}
             >
               <CardEvent
                 id={event._id}
@@ -41,7 +46,7 @@ const Events = () => {
                 text={event.subtitle ?? ""}
                 date={`${new Date(event.startDate).toLocaleDateString()} - ${event.endDate ? new Date(event.endDate).toLocaleDateString() : "TBD"}`}
                 location={event.location ?? ""}
-                className={`grid grid-cols-1 lg:grid-cols-2 ${isFifthItem ? "md:max-w-[calc(50%-12px)] lg:max-w-none" : ""}`}
+                className={`${isFullWidth ? "grid grid-cols-1 lg:grid-cols-2 lg:max-w-none" : ""}`}
               />
             </div>
           );
