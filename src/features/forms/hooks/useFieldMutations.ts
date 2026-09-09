@@ -1,5 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addField, updateField, deleteField, reorderFields } from "../service/forms";
+import {
+  addField,
+  updateField,
+  deleteField,
+  reorderFields,
+} from "../service/forms";
 import { queryKeys } from "../../../lib/queryKeys";
 import { AddFieldInput, UpdateFieldInput } from "../types";
 
@@ -18,8 +23,13 @@ export const useUpdateField = (slug: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ fieldKey, input }: { fieldKey: string; input: UpdateFieldInput }) =>
-      updateField(slug, fieldKey, input),
+    mutationFn: ({
+      fieldKey,
+      input,
+    }: {
+      fieldKey: string;
+      input: UpdateFieldInput;
+    }) => updateField(slug, fieldKey, input),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.forms.bySlug(slug) });
     },

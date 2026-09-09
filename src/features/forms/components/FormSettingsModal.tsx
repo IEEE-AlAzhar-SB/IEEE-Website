@@ -195,7 +195,11 @@ const FormSettingsModal = ({
               disabled={isPending}
               className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-500 shadow-lg shadow-blue-500/10 transition disabled:opacity-50 flex items-center gap-2"
             >
-              {isPending ? "Saving..." : isEditing ? "Save Changes" : "Create Form"}
+              {isPending
+                ? "Saving..."
+                : isEditing
+                  ? "Save Changes"
+                  : "Create Form"}
             </button>
           </div>
         </form>
