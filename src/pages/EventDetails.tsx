@@ -92,7 +92,7 @@ const EventDetails = () => {
               <div>
                 <h3 className="font-bold text-[#1A1A1A] text-base">Location</h3>
                 {event.venueDetails.note && (
-                  <p className="text-slate-600 text-sm mt-1">
+                  <p dir="rtl" className="text-slate-600 text-sm mt-1">
                     {event.venueDetails.note}
                   </p>
                 )}
