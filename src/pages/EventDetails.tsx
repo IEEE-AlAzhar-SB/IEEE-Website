@@ -1,22 +1,54 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { FaArrowUp } from "react-icons/fa";
+import { useEffect } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { FaArrowUp, FaMapMarkerAlt } from "react-icons/fa";
 import { Card, CardSlider } from "../components";
-import { useEventByIdQuery } from "../hooks";
+import { useEventByIdQuery, useEventBySlugQuery } from "../hooks";
 import { usePublicFormQuery, DynamicForm } from "../features/forms";
 import { submitForm } from "../features/forms/service/forms";
 
 const EventDetails = () => {
-  const { id } = useParams();
+  const { slug, id } = useParams();
+  const navigate = useNavigate();
+  const isLegacyRoute = !slug && !!id;
 
-  if (!id) {
-    const navigate = useNavigate();
-    navigate("/events");
-    return null;
+  const slugQuery = useEventBySlugQuery(slug ?? "", {
+    enabled: !isLegacyRoute && !!slug,
+  });
+  const idQuery = useEventByIdQuery(id ?? "", {
+    enabled: isLegacyRoute && !!id,
+  });
+  const { data: event, isLoading, error } = isLegacyRoute
+    ? idQuery
+    : slugQuery;
+
+  // Legacy UUID URLs redirect to the canonical slug URL once loaded.
+  const redirectSlug = isLegacyRoute
+    ? idQuery.data?.slug?.current
+    : undefined;
+  useEffect(() => {
+    if (redirectSlug) {
+      navigate(`/events/${redirectSlug}`, { replace: true });
+    }
+  }, [redirectSlug, navigate]);
+
+  if (!slug && !id) {
+    return <Navigate to="/events" replace />;
   }
 
-  const { data: event, isLoading, error } = useEventByIdQuery(id);
+  if (isLoading || redirectSlug) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 py-10">
+        <div className="animate-pulse space-y-4">
+          <div className="h-[300px] bg-gray-200 rounded-2xl" />
+          <div className="h-8 bg-gray-200 rounded w-64" />
+          <div className="h-4 bg-gray-200 rounded w-full" />
+          <div className="h-4 bg-gray-200 rounded w-2/3" />
+        </div>
+      </div>
+    );
+  }
 
-  if (!event) {
+  if (error || !event) {
     return (
       <div className="p-6 text-center">
         <h1 className="my-24 text-xl font-bold">Event Not Found</h1>
@@ -50,6 +82,37 @@ const EventDetails = () => {
           </span>
         </h2>
       </div>
+
+      {(event.location === "offline" || event.location === "hybrid") &&
+        event.venueDetails &&
+        (event.venueDetails.mapLink || event.venueDetails.note) && (
+          <div className="my-6 flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-start gap-3 flex-1">
+              <FaMapMarkerAlt className="text-[#05568D] text-xl flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-bold text-[#1A1A1A] text-base">Venue</h3>
+                {event.venueDetails.note && (
+                  <p className="text-slate-600 text-sm mt-1">
+                    {event.venueDetails.note}
+                  </p>
+                )}
+              </div>
+            </div>
+            {event.venueDetails.mapLink && (
+              <a
+                href={event.venueDetails.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+              >
+                <span>Get Directions</span>
+                <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
+                  <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
+                </span>
+              </a>
+            )}
+          </div>
+        )}
 
       {event.speakers && event.speakers.length > 0 && (
         <div className="my-10">

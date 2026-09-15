@@ -41,6 +41,7 @@ const Events = () => {
             >
               <CardEvent
                 id={event._id}
+                slug={event.slug?.current}
                 image={event.coverImage?.asset?.url ?? ""}
                 title={event.title}
                 text={event.subtitle ?? ""}

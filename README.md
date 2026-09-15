@@ -189,7 +189,7 @@ There are no serverless functions or Edge middleware — it's purely static host
 | `/about`            | About        | Organization history and achievements             |
 | `/board`            | Board        | Board members by year with filterable sections    |
 | `/events`           | Events       | Events listing                                    |
-| `/eventdetails/:id` | EventDetails | Event detail with speakers, gallery, registration |
+| `/events/:slug`   | EventDetails | Event detail with speakers, gallery, venue, registration |
 | `/committees`       | Committees   | Tabbed committee overview                         |
 | `/contactus`        | ContactUs    | Feedback submission form                          |
 | `/joinus`           | JoinUs       | Join application form                             |

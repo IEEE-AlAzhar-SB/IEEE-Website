@@ -221,6 +221,7 @@ const Home = () => {
               <CardEvent
                 key={event._id}
                 id={event._id}
+                slug={event.slug?.current}
                 image={event.coverImage?.asset?.url ?? "image not found"}
                 title={event.title}
                 text={event.subtitle ?? "subtitle not found"}
