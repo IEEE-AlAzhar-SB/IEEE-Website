@@ -32,6 +32,7 @@ export const queryKeys = {
   events: {
     all: ["events"] as const,
     byId: (id: string) => ["events", id] as const,
+    bySlug: (slug: string) => ["events", "slug", slug] as const,
   },
   committees: {
     all: ["committees"] as const,

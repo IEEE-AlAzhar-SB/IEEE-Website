@@ -10,6 +10,8 @@ interface CardProps {
   registrationLink?: string;
   location: string;
   className?: string;
+  slug?: string;
+  /** Legacy UUID fallback for events without a slug yet. */
   id?: string;
 }
 
@@ -22,8 +24,10 @@ const Card = ({
   registrationLink,
   location,
   className,
+  slug,
   id,
 }: CardProps) => {
+  const detailsPath = slug ? `/events/${slug}` : `/eventdetails/${id}`;
   return (
     <div
       className={`group w-full h-full max-w-[650px] bg-white shadow-md hover:shadow-xl rounded-2xl p-4 md:p-5 flex flex-col gap-5 mx-auto transition-all duration-300 hover:-translate-y-1 ${className}`}
@@ -70,7 +74,7 @@ const Card = ({
 
         <div className="flex items-center gap-3">
           <Link
-            to={`/eventdetails/${id}`}
+            to={detailsPath}
             className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-blue-900/10 transform active:scale-95"
           >
             <span>Explore Event</span>
