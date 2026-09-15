@@ -74,11 +74,11 @@ const FormSettingsModal = ({
   };
 
   const inputClass =
-    "w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500";
+    "w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]";
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999999] flex items-center justify-center p-4">
-      <div className="bg-[#1E293B] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#05568D] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6 pb-2 border-b border-slate-700">
           <h3 className="text-lg font-bold text-white">
             {isEditing ? "Edit Form Settings" : "Create New Form"}
@@ -193,7 +193,7 @@ const FormSettingsModal = ({
             <button
               type="submit"
               disabled={isPending}
-              className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-500 shadow-lg shadow-blue-500/10 transition disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2 bg-white text-[#05568D] rounded-xl text-sm font-semibold hover:bg-white/90 shadow-lg shadow-black/20 transition disabled:opacity-50 flex items-center gap-2"
             >
               {isPending
                 ? "Saving..."

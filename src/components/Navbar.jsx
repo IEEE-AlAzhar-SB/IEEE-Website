@@ -48,7 +48,7 @@ const Navbar = () => {
 
           <Link
             to="/contactus"
-            className="hidden md:flex items-center gap-2.5 bg-white text-[#05568D] font-extrabold py-2 px-5 rounded-full transition-all duration-300 shadow-md hover:bg-blue-50 transform hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 group"
+            className="hidden md:flex items-center gap-2.5 bg-white text-[#05568D] font-extrabold py-2 px-5 rounded-full transition-all duration-300 shadow-md hover:bg-[#05568D]/10 transform hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 group"
           >
             <span>Contact Us</span>
             <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#05568D] transition-transform group-hover:rotate-45 duration-300">
@@ -76,7 +76,7 @@ const Navbar = () => {
       )}
 
       <div
-        className={`fixed top-0 right-0 h-screen w-[280px] max-w-[85vw] bg-[#0F3063] border-l border-white/10 shadow-2xl flex flex-col justify-between p-6 transition-transform duration-300 ease-in-out z-[9999999] ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-screen w-[280px] max-w-[85vw] bg-[#05568D] border-l border-white/10 shadow-2xl flex flex-col justify-between p-6 transition-transform duration-300 ease-in-out z-[9999999] ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div>
           <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">

@@ -84,14 +84,14 @@ const Home = () => {
         className="text-white pt-10 pb-16 z-5 relative overflow-hidden"
         style={{
           backgroundImage:
-            "linear-gradient(135deg, #0b2247 0%, #0F3063 40%, #1E61C9 100%)",
+            "linear-gradient(135deg, #05568D 0%, #033e66 100%)",
         }}
       >
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative mt-[5rem]">
           <div className="space-y-6 z-10">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white drop-shadow-sm">
               Empower Your Future, <br />
-              <span className="bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
+              <span className="text-white">
                 Engineer the World
               </span>{" "}
               with
@@ -109,19 +109,19 @@ const Home = () => {
               </span>
             </div>
 
-            <p className="text-sm md:text-base lg:text-lg max-w-md text-blue-100/80 leading-relaxed font-medium">
+            <p className="text-sm md:text-base lg:text-lg max-w-md text-white/80 leading-relaxed font-medium">
               Be part of the movement that pushes the limits of what's possible
               in technology and engineering innovation.
             </p>
 
             <Link
               to="/joinus"
-              className="group flex items-center gap-3 bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] w-max shadow-xl shadow-blue-900/20"
+              className="group flex items-center gap-3 bg-white hover:bg-[#05568D]/10 text-[#05568D] font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] w-max shadow-xl shadow-[#05568D]/20"
             >
               <span className="tracking-wide text-sm md:text-base">
                 Join Us
               </span>
-              <span className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-600 group-hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/30">
+              <span className="w-7 h-7 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-[#033e66] transition-colors shadow-md shadow-[#05568D]/30">
                 <FaArrowUp className="text-white transform rotate-90 text-xs group-hover:translate-x-0.5 transition-transform" />
               </span>
             </Link>
@@ -129,7 +129,7 @@ const Home = () => {
 
           <div className="relative flex justify-center items-center h-[380px] md:h-[450px] w-full max-w-[500px] mx-auto">
             {isLoadingHomeHeroImages ? (
-              <div className="animate-pulse bg-gradient-to-r from-blue-900/50 to-slate-900/50 border border-white/5 w-full h-full rounded-2xl"></div>
+              <div className="animate-pulse bg-gradient-to-r from-white/10 to-white/5 border border-white/5 w-full h-full rounded-2xl"></div>
             ) : (
               homeHeroImages?.map((item, index) => (
                 <img
@@ -151,7 +151,7 @@ const Home = () => {
             🚀 Connect, Learn, and Build Tomorrow's Technology Together
           </div>
         </div>
-        <div className="bg-[#1E61C9] rounded-bl-[24px] hidden sm:block shadow-inner" />
+        <div className="bg-[#05568D] rounded-bl-[24px] hidden sm:block shadow-inner" />
       </div>
 
       {/*  Discover Section */}
@@ -167,7 +167,7 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center relative group">
-            <div className="absolute inset-0 bg-blue-600/5 rounded-2xl blur-xl group-hover:blur-2xl transition-all pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[#05568D]/5 rounded-2xl blur-xl group-hover:blur-2xl transition-all pointer-events-none"></div>
             <img
               src={discover}
               alt="About Section"
@@ -191,10 +191,10 @@ const Home = () => {
               to="/about"
               className="group flex items-center gap-2.5 text-[#05568D] font-bold text-sm w-max transition-colors"
             >
-              <span className="group-hover:text-blue-700 transition-colors">
+              <span className="group-hover:text-[#033e66] transition-colors">
                 See More About Us
               </span>
-              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-blue-700 transition-all transform group-hover:translate-x-0.5 shadow-sm shadow-[#05568D]/30">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-[#033e66] transition-all transform group-hover:translate-x-0.5 shadow-sm shadow-[#05568D]/30">
                 <FaArrowUp className="text-white transform rotate-90 text-[10px]" />
               </span>
             </Link>
@@ -265,11 +265,11 @@ const Home = () => {
 
             <Link
               to="/committees"
-              className="group flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg shadow-blue-600/10 transform hover:scale-[1.02] w-max text-sm"
+              className="group flex items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg shadow-[#05568D]/10 transform hover:scale-[1.02] w-max text-sm"
             >
               <span>Explore Committees</span>
               <span className="w-6 h-6 flex items-center justify-center rounded-full bg-white transition-transform group-hover:translate-x-0.5">
-                <FaArrowUp className="text-blue-600 transform rotate-45 text-xs" />
+                <FaArrowUp className="text-[#05568D] transform rotate-45 text-xs" />
               </span>
             </Link>
           </div>

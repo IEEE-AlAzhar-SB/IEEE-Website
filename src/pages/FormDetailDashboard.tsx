@@ -241,7 +241,7 @@ function FormDetailDashboard() {
           <div className="h-8 bg-slate-700/50 rounded w-64 animate-pulse" />
           <div className="h-4 bg-slate-700/50 rounded w-40 animate-pulse" />
         </div>
-        <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50 animate-pulse space-y-4">
+        <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50 animate-pulse space-y-4">
           <div className="h-5 bg-slate-700/50 rounded w-48" />
           <div className="grid grid-cols-2 gap-4">
             <div className="h-4 bg-slate-700/50 rounded" />
@@ -250,7 +250,7 @@ function FormDetailDashboard() {
             <div className="h-4 bg-slate-700/50 rounded" />
           </div>
         </div>
-        <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50 animate-pulse space-y-4">
+        <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50 animate-pulse space-y-4">
           <div className="h-5 bg-slate-700/50 rounded w-32" />
           <div className="space-y-3">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -342,7 +342,7 @@ function FormDetailDashboard() {
       </header>
 
       {/* Metadata Card */}
-      <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50">
+      <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-white">Form Details</h2>
           <button
@@ -394,7 +394,7 @@ function FormDetailDashboard() {
       </div>
 
       {/* Fields Section */}
-      <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50">
+      <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-white">Fields</h2>
           <button
@@ -404,7 +404,7 @@ function FormDetailDashboard() {
               setIsFieldModalOpen(true);
             }}
             disabled={hasSubmissions}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-blue-500/10 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-white/90 text-[#05568D] text-sm font-semibold rounded-xl shadow-lg shadow-black/20 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <GoPlus size={16} /> Add Field
           </button>
@@ -427,7 +427,7 @@ function FormDetailDashboard() {
               return (
                 <div
                   key={field.key}
-                  className="flex items-center gap-3 bg-[#0F172A] border border-slate-800 rounded-xl px-4 py-3"
+                  className="flex items-center gap-3 bg-[#033e66] border border-slate-800 rounded-xl px-4 py-3"
                 >
                   {!hasSubmissions && (
                     <div className="flex flex-col gap-0.5">
@@ -459,7 +459,7 @@ function FormDetailDashboard() {
                         {field.type}
                       </span>
                       {field.isSystem && (
-                        <span className="px-1.5 py-0.5 bg-blue-500/10 text-blue-400 text-[10px] font-semibold rounded">
+                        <span className="px-1.5 py-0.5 bg-white/10 text-white/80 text-[10px] font-semibold rounded">
                           System
                         </span>
                       )}
@@ -523,7 +523,7 @@ function FormDetailDashboard() {
       </div>
 
       {/* Submissions Section */}
-      <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50">
+      <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-white">Submissions</h2>
           <button
@@ -546,7 +546,7 @@ function FormDetailDashboard() {
 
       {/* Live Visitor Preview */}
       {publicForm && (
-        <div className="bg-[#1E293B] p-6 rounded-2xl border border-slate-700/50">
+        <div className="bg-[#05568D] p-6 rounded-2xl border border-slate-700/50">
           <div className="mb-4">
             <h2 className="text-lg font-bold text-white">Visitor Preview</h2>
             <p className="text-slate-400 text-sm mt-1">

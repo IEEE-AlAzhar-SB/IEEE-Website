@@ -5,7 +5,7 @@ const CardLogo = ({ imageSrc, title, description }) => {
         <h3 className="text-slate-800 text-sm sm:text-base md:text-lg font-bold tracking-tight group-hover:text-[#05568D] transition-colors duration-200 capitalize">
           {title}
         </h3>
-        <div className="w-[50px] sm:w-[55px] md:w-[60px] aspect-square flex items-center justify-center bg-slate-50 rounded-xl p-2 group-hover:bg-blue-50 transition-colors duration-300 border border-slate-100">
+        <div className="w-[50px] sm:w-[55px] md:w-[60px] aspect-square flex items-center justify-center bg-slate-50 rounded-xl p-2 group-hover:bg-[#05568D]/10 transition-colors duration-300 border border-slate-100">
           <img
             src={imageSrc}
             alt={title || "Card Icon"}

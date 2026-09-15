@@ -56,7 +56,7 @@ const CardMember = ({
               href={facebookLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-900 text-white hover:bg-[#1877F2] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
+              className="bg-slate-900 text-white hover:bg-[#05568D] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
               title="Facebook"
             >
               <FaFacebookF className="text-sm sm:text-base" />
@@ -80,7 +80,7 @@ const CardMember = ({
               href={linkedinLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-900 text-white hover:bg-[#0077B5] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
+              className="bg-slate-900 text-white hover:bg-[#05568D] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
               title="LinkedIn"
             >
               <FaLinkedinIn className="text-sm sm:text-base" />

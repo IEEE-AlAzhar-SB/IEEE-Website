@@ -56,10 +56,10 @@ function Login() {
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#0a192f]">
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#0F3063] to-[#1E61C9] p-12 flex-col justify-between relative overflow-hidden">
+    <div className="flex h-screen w-full bg-[#033e66]">
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#05568D] to-[#033e66] p-12 flex-col justify-between relative overflow-hidden">
         <div className="absolute top-[-20%] left-[-20%] w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-80 h-80 bg-blue-400/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
 
         <Link
           to="/"
@@ -70,12 +70,12 @@ function Login() {
         </Link>
 
         <div className="z-10 space-y-4 max-w-md">
-          <span className="text-blue-300 font-bold tracking-wider text-sm uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+          <span className="text-white font-bold tracking-wider text-sm uppercase bg-white/10 px-3 py-1 rounded-full border border-white/20">
             IEEE Al-Azhar Portal
           </span>
           <h1 className="text-4xl font-extrabold text-white leading-tight">
             Welcome Back, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-100">
+            <span className="text-white">
               Board Administrator
             </span>
           </h1>
@@ -90,8 +90,8 @@ function Login() {
         </p>
       </div>
 
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-[#0F172A]">
-        <div className="w-full max-w-md space-y-8 bg-[#1E293B] p-8 rounded-2xl shadow-xl border border-slate-700/50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-[#033e66]">
+        <div className="w-full max-w-md space-y-8 bg-[#05568D] p-8 rounded-2xl shadow-xl border border-slate-700/50">
           <div className="text-center lg:text-left space-y-2">
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Account Login
@@ -120,7 +120,7 @@ function Login() {
                   name="email"
                   value={credentials.email}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 bg-[#0F172A] border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition text-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-[#033e66] border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#05568D] focus:ring-2 focus:ring-[#05568D]/20 transition text-sm"
                   placeholder="you@example.com"
                 />
               </div>
@@ -144,7 +144,7 @@ function Login() {
                   name="password"
                   value={credentials.password}
                   onChange={handleChange}
-                  className="w-full pl-10 pr-10 py-3 bg-[#0F172A] border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition text-sm"
+                  className="w-full pl-10 pr-10 py-3 bg-[#033e66] border border-slate-600 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#05568D] focus:ring-2 focus:ring-[#05568D]/20 transition text-sm"
                   placeholder="••••••••"
                 />
                 <button
@@ -170,7 +170,7 @@ function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition transform active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-full bg-white hover:bg-white/90 text-[#05568D] font-semibold py-3 px-4 rounded-xl shadow-lg shadow-black/20 transition transform active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isSubmitting ? "Signing In..." : "Sign In to System"}
             </button>
@@ -179,7 +179,7 @@ function Login() {
           <div className="lg:hidden text-center pt-2">
             <Link
               to="/"
-              className="text-xs text-blue-400 hover:underline inline-flex items-center gap-1"
+              className="text-xs text-white/80 hover:underline inline-flex items-center gap-1"
             >
               <LuArrowLeft size={12} /> Back to Homepage
             </Link>

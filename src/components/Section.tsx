@@ -21,7 +21,7 @@ const Section = ({
       className="text-white min-h-[350px] md:min-h-[400px] w-full flex items-center justify-center relative overflow-hidden py-16 md:py-12"
       style={{
         backgroundImage:
-          "linear-gradient(135deg, #0b2247 0%, #0F3063 40%, #1E61C9 100%)",
+          "linear-gradient(135deg, #05568D 0%, #033e66 100%)",
       }}
     >
       <style>{`
@@ -43,7 +43,7 @@ const Section = ({
         </h2>
 
         {additionalText && (
-          <p className="text-sm md:text-lg text-blue-100/80 font-medium max-w-2xl mx-auto leading-relaxed mt-1">
+          <p className="text-sm md:text-lg text-white/80 font-medium max-w-2xl mx-auto leading-relaxed mt-1">
             {additionalText}
           </p>
         )}
@@ -68,7 +68,7 @@ const Section = ({
               {
                 icon: FaFacebookF,
                 url: "https://www.facebook.com/share/1A7kWQHZ4e/",
-                hoverStyle: "hover:bg-[#1877F2] hover:text-white",
+                hoverStyle: "hover:bg-[#05568D] hover:text-white",
               },
               {
                 icon: FaInstagram,
@@ -79,7 +79,7 @@ const Section = ({
               {
                 icon: FaLinkedinIn,
                 url: "https://www.linkedin.com/company/ieee-alazhar/",
-                hoverStyle: "hover:bg-[#0077B5] hover:text-white",
+                hoverStyle: "hover:bg-[#05568D] hover:text-white",
               },
             ].map(({ icon: Icon, url, hoverStyle }, i) => (
               <a

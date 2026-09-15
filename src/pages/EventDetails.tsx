@@ -60,7 +60,7 @@ const EventDetails = () => {
     <div>
       <section
         className={`relative h-[500px] w-full bg-center bg-cover ${
-          !event.coverImage?.asset.url ? "" : "bg-blue-600"
+          !event.coverImage?.asset.url ? "" : "bg-[#05568D]"
         }`}
         style={
           event.coverImage?.asset.url
@@ -73,7 +73,7 @@ const EventDetails = () => {
       <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
         <h2 className="flex flex-col items-start gap-2">
           <span
-            className={`w-fit bg-blue-600 text-white px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
+            className={`w-fit bg-white text-[#05568D] px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
           >
             {event.title}
           </span>
@@ -103,7 +103,7 @@ const EventDetails = () => {
                 href={event.venueDetails.mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+                className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
               >
                 <span>Get Directions</span>
                 <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
@@ -184,7 +184,7 @@ function ExternalRegisterSection({ link }: { link: string }) {
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+        className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
       >
         <span>Register</span>
         <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
