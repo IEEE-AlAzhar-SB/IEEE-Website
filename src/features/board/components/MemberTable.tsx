@@ -31,14 +31,14 @@ const MemberTable = ({
   }
 
   return (
-    <section className="bg-[#1E293B] rounded-2xl border border-slate-700/50 overflow-hidden shadow-xl">
+    <section className="bg-[#05568D] rounded-2xl border border-slate-700/50 overflow-hidden shadow-xl">
       {isLoading ? (
         <TableSkeleton cols={5} rows={5} />
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[600px]">
             <thead>
-              <tr className="bg-[#131C2E] border-b border-slate-700/50 text-slate-400 uppercase text-[11px] tracking-wider font-semibold">
+              <tr className="bg-[#033e66] border-b border-slate-700/50 text-slate-400 uppercase text-[11px] tracking-wider font-semibold">
                 <th className="py-4 px-6">Member Info</th>
                 <th className="py-4 px-6">Position / Track</th>
                 <th className="py-4 px-6">Classification</th>
@@ -111,7 +111,7 @@ const MemberTable = ({
                       <div className="flex justify-center items-center gap-2">
                         <button
                           onClick={() => onEdit(member)}
-                          className="p-1.5 hover:bg-blue-500/10 text-blue-400 rounded-lg transition"
+                          className="p-1.5 hover:bg-white/10 text-white/80 rounded-lg transition"
                           title="Edit"
                         >
                           <FiEdit3 size={16} />

@@ -190,7 +190,7 @@ export default function FieldBuilderModal({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-[#1E293B] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#05568D] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold text-white">
             {isEditing ? "Edit Field" : "Add New Field"}
@@ -218,7 +218,7 @@ export default function FieldBuilderModal({
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value as FieldType)}
-                className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
               >
                 {FIELD_TYPES.map((ft) => (
                   <option key={ft.value} value={ft.value}>
@@ -238,7 +238,7 @@ export default function FieldBuilderModal({
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               placeholder="e.g. Full Name"
-              className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
               required
             />
           </div>
@@ -250,7 +250,7 @@ export default function FieldBuilderModal({
                 id="field-required"
                 checked={required}
                 onChange={(e) => setRequired(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-[#0F172A] text-blue-600 focus:ring-blue-500"
+                className="w-4 h-4 rounded border-slate-600 bg-[#033e66] text-[#05568D] focus:ring-[#05568D]"
               />
               <label
                 htmlFor="field-required"
@@ -272,7 +272,7 @@ export default function FieldBuilderModal({
                   value={placeholder}
                   onChange={(e) => setPlaceholder(e.target.value)}
                   placeholder="Optional placeholder text"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
 
@@ -285,7 +285,7 @@ export default function FieldBuilderModal({
                   value={helpText}
                   onChange={(e) => setHelpText(e.target.value)}
                   placeholder="Optional helper text below the field"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
             </>
@@ -300,7 +300,7 @@ export default function FieldBuilderModal({
               value={errMsgRequired}
               onChange={(e) => setErrMsgRequired(e.target.value)}
               placeholder="e.g. This field is required"
-              className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
             />
           </div>
 
@@ -314,7 +314,7 @@ export default function FieldBuilderModal({
                   {options.map((opt, index) => (
                     <div
                       key={`${opt}-${index}`}
-                      className="flex items-center gap-2 bg-[#0F172A] border border-slate-600 rounded-xl px-3 py-2"
+                      className="flex items-center gap-2 bg-[#033e66] border border-slate-600 rounded-xl px-3 py-2"
                     >
                       <span className="text-sm text-white flex-1 truncate">
                         {opt}
@@ -342,7 +342,7 @@ export default function FieldBuilderModal({
                     }
                   }}
                   placeholder="New option"
-                  className="flex-1 px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="flex-1 px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
                 <button
                   type="button"
@@ -369,7 +369,7 @@ export default function FieldBuilderModal({
                   onChange={(e) => setMinLength(e.target.value)}
                   placeholder="Min"
                   min={0}
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div>
@@ -382,7 +382,7 @@ export default function FieldBuilderModal({
                   onChange={(e) => setMaxLength(e.target.value)}
                   placeholder="Max"
                   min={0}
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div className="col-span-2">
@@ -394,7 +394,7 @@ export default function FieldBuilderModal({
                   value={pattern}
                   onChange={(e) => setPattern(e.target.value)}
                   placeholder="e.g. ^[A-Za-z]+$"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div className="col-span-2 mt-2 border-t border-slate-600 pt-3">
@@ -411,7 +411,7 @@ export default function FieldBuilderModal({
                   value={errMsgMinLength}
                   onChange={(e) => setErrMsgMinLength(e.target.value)}
                   placeholder="e.g. Too short"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div>
@@ -423,7 +423,7 @@ export default function FieldBuilderModal({
                   value={errMsgMaxLength}
                   onChange={(e) => setErrMsgMaxLength(e.target.value)}
                   placeholder="e.g. Too long"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div className="col-span-2">
@@ -435,7 +435,7 @@ export default function FieldBuilderModal({
                   value={errMsgPattern}
                   onChange={(e) => setErrMsgPattern(e.target.value)}
                   placeholder="e.g. Invalid format"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
             </div>
@@ -452,7 +452,7 @@ export default function FieldBuilderModal({
                   value={min}
                   onChange={(e) => setMin(e.target.value)}
                   placeholder="Min"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div>
@@ -464,7 +464,7 @@ export default function FieldBuilderModal({
                   value={max}
                   onChange={(e) => setMax(e.target.value)}
                   placeholder="Max"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div className="col-span-2 mt-2 border-t border-slate-600 pt-3">
@@ -481,7 +481,7 @@ export default function FieldBuilderModal({
                   value={errMsgMin}
                   onChange={(e) => setErrMsgMin(e.target.value)}
                   placeholder="e.g. Value too low"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
               <div>
@@ -493,7 +493,7 @@ export default function FieldBuilderModal({
                   value={errMsgMax}
                   onChange={(e) => setErrMsgMax(e.target.value)}
                   placeholder="e.g. Value too high"
-                  className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
                 />
               </div>
             </div>
@@ -510,7 +510,7 @@ export default function FieldBuilderModal({
             <button
               type="submit"
               disabled={isPending || !label.trim()}
-              className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-500 shadow-lg shadow-blue-500/10 transition disabled:opacity-50"
+              className="px-5 py-2 bg-white text-[#05568D] rounded-xl text-sm font-semibold hover:bg-[#033e66] shadow-lg shadow-[#05568D]/10 transition disabled:opacity-50"
             >
               {isPending
                 ? isEditing

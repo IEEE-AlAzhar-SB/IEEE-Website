@@ -103,7 +103,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
         }
 
         .swiper-pagination-bullet {
-          background: #cbd5e1 !important;
+          background: rgba(5, 86, 141, 0.25) !important;
           opacity: 1 !important;
           width: 8px !important;
           height: 8px !important;

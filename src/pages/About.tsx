@@ -40,7 +40,7 @@ const About = () => {
           {stats.map((item, index) => (
             <div
               key={index}
-              className="w-[calc(50%-8px)] sm:w-40 md:w-48 lg:w-56 h-28 bg-white shadow-xl shadow-blue-900/5 rounded-2xl flex flex-col items-center justify-center text-center p-3 border border-gray-100/50 transform hover:-translate-y-1 transition duration-300"
+              className="w-[calc(50%-8px)] sm:w-40 md:w-48 lg:w-56 h-28 bg-white shadow-xl shadow-[#05568D]/10 rounded-2xl flex flex-col items-center justify-center text-center p-3 border border-gray-100/50 transform hover:-translate-y-1 transition duration-300"
             >
               <h2 className="text-[#05568D] text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
                 {item.number}
@@ -105,12 +105,12 @@ const About = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#1E61C9] to-[#0F3063] rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl my-16 lg:my-24 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+        <div className="bg-gradient-to-r from-[#05568D] to-[#033e66] rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl my-16 lg:my-24 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
           <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold text-center lg:text-left lg:w-2/5 leading-snug">
             How a Passion for Technology Sparked a Movement
           </h2>
-          <div className="h-0.5 w-24 bg-blue-300/30 lg:h-16 lg:w-0.5 hidden sm:block"></div>
-          <p className="text-blue-50/90 text-sm sm:text-base leading-8 text-center lg:text-left lg:w-3/5 font-medium">
+          <div className="h-0.5 w-24 bg-white/30 lg:h-16 lg:w-0.5 hidden sm:block"></div>
+          <p className="text-white/90 text-sm sm:text-base leading-8 text-center lg:text-left lg:w-3/5 font-medium">
             A shared passion for technology grew into a movement that drives
             innovation and learning. At IEEE, we empower students to push
             boundaries, collaborate, and lead. IEEE Al-Azhar SB, guided by the

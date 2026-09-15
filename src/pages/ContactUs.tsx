@@ -71,7 +71,7 @@ const ContactUs = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Ahmed"
-                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
                 required
               />
             </div>
@@ -88,7 +88,7 @@ const ContactUs = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="mail@something.com"
-                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ const ContactUs = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="01234567890"
-                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
               />
             </div>
           </div>
@@ -122,7 +122,7 @@ const ContactUs = () => {
               value={formData.message}
               onChange={handleChange}
               placeholder="Write your message here..."
-              className="p-3 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="p-3 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D] resize-none"
               required
             ></textarea>
           </div>
@@ -145,7 +145,7 @@ const ContactUs = () => {
             <button
               type="submit"
               disabled={isPending}
-              className={`bg-[#05568D] text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 font-semibold ${
+              className={`bg-[#05568D] text-white px-6 py-2 rounded-full hover:bg-[#033e66] transition duration-300 font-semibold ${
                 isPending ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >

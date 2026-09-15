@@ -12,10 +12,10 @@ interface SubmissionsTableProps {
 function LoadingSkeleton() {
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#0F1729]">
+      <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#033e66]">
         <table className="w-full text-left border-collapse min-w-[600px]">
           <thead>
-            <tr className="bg-[#131C2E] border-b border-slate-700/50">
+            <tr className="bg-[#033e66] border-b border-slate-700/50">
               <th className="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 <div className="animate-pulse bg-slate-700/50 rounded w-32 h-4" />
               </th>
@@ -83,7 +83,7 @@ export default function SubmissionsTable({
 
   if (!data || data.submissions.length === 0) {
     return (
-      <div className="bg-[#1E293B] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
+      <div className="bg-[#05568D] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
         No submissions yet.
       </div>
     );
@@ -116,10 +116,10 @@ export default function SubmissionsTable({
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#0F1729]">
+      <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#033e66]">
         <table className="w-full text-left border-collapse min-w-[600px]">
           <thead>
-            <tr className="bg-[#131C2E] border-b border-slate-700/50">
+            <tr className="bg-[#033e66] border-b border-slate-700/50">
               <th className="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Email
               </th>
@@ -181,7 +181,7 @@ export default function SubmissionsTable({
                   onClick={() => onPageChange(p)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
                     p === currentPage
-                      ? "bg-blue-600 text-white"
+                      ? "bg-white text-[#05568D]"
                       : "bg-slate-800 text-slate-400 hover:bg-slate-700"
                   }`}
                 >

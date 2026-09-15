@@ -39,7 +39,7 @@ const Footer = () => {
             {
               icon: FaFacebookF,
               url: "https://www.facebook.com/share/1A7kWQHZ4e/",
-              hoverBg: "hover:bg-[#1877F2] hover:text-white",
+              hoverBg: "hover:bg-[#05568D] hover:text-white",
             },
             {
               icon: FaInstagram,
@@ -50,7 +50,7 @@ const Footer = () => {
             {
               icon: FaLinkedinIn,
               url: "https://www.linkedin.com/company/ieee-alazhar/",
-              hoverBg: "hover:bg-[#0077B5] hover:text-white",
+              hoverBg: "hover:bg-[#05568D] hover:text-white",
             },
           ].map(({ icon: Icon, url, hoverBg }, i) => (
             <a
@@ -73,7 +73,7 @@ const Footer = () => {
               Contact Us
             </h3>
           </div>
-          <p className="text-sm text-blue-100/80 font-medium">
+          <p className="text-sm text-white/80 font-medium">
             Email:{" "}
             <a
               href="mailto:alazharieee@gmail.com"
@@ -97,7 +97,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="w-full sm:w-auto whitespace-nowrap bg-white text-[#05568D] font-bold px-6 py-3 rounded-full hover:bg-blue-50 transition transform active:scale-95 text-sm shadow-md shadow-blue-900/10"
+              className="w-full sm:w-auto whitespace-nowrap bg-white text-[#05568D] font-bold px-6 py-3 rounded-full hover:bg-[#05568D]/10 transition transform active:scale-95 text-sm shadow-md shadow-[#05568D]/10"
             >
               Subscribe to news
             </button>
@@ -105,7 +105,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-white/10 mt-10 pt-4 text-center text-xs text-blue-100/60 flex flex-col md:flex-row justify-between items-center gap-3 w-[90%] max-w-7xl m-auto font-medium">
+      <div className="border-t border-white/10 mt-10 pt-4 text-center text-xs text-white/60 flex flex-col md:flex-row justify-between items-center gap-3 w-[90%] max-w-7xl m-auto font-medium">
         <p>
           © {new Date().getFullYear()} IEEE Al-Azhar Student Branch. All Rights
           Reserved.

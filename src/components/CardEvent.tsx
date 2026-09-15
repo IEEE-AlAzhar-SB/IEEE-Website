@@ -75,7 +75,7 @@ const Card = ({
         <div className="flex items-center gap-3">
           <Link
             to={detailsPath}
-            className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-blue-900/10 transform active:scale-95"
+            className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-[#05568D]/10 transform active:scale-95"
           >
             <span>Explore Event</span>
             <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white transition-transform group-hover:translate-x-0.5">
@@ -86,7 +86,7 @@ const Card = ({
           {registrationLink && (
             <Link
               to={registrationLink}
-              className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-blue-700 text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-blue-900/10 transform active:scale-95"
+              className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-[#05568D]/10 transform active:scale-95"
             >
               <span>Register</span>
               <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white transition-transform group-hover:translate-x-0.5">

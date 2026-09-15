@@ -26,7 +26,7 @@ const FormsTable = ({
       <div className="overflow-x-auto w-full animate-pulse">
         <table className="w-full text-left border-collapse min-w-[600px]">
           <thead>
-            <tr className="bg-[#131C2E] border-b border-slate-700/50">
+            <tr className="bg-[#033e66] border-b border-slate-700/50">
               {["Title", "Status", "Submissions", "Actions"].map((h) => (
                 <th key={h} className="py-4 px-6">
                   <div className="h-4 bg-slate-700/50 rounded w-24" />
@@ -72,7 +72,7 @@ const FormsTable = ({
 
   if (forms.length === 0) {
     return (
-      <div className="bg-[#1E293B] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
+      <div className="bg-[#05568D] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
         No forms created yet.
       </div>
     );
@@ -82,7 +82,7 @@ const FormsTable = ({
     <div className="overflow-x-auto w-full">
       <table className="w-full text-left border-collapse min-w-[600px]">
         <thead>
-          <tr className="bg-[#131C2E] border-b border-slate-700/50">
+          <tr className="bg-[#033e66] border-b border-slate-700/50">
             <th className="py-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Title
             </th>
@@ -106,7 +106,7 @@ const FormsTable = ({
               <td className="py-4 px-6">
                 <Link
                   to={`/dashboard/forms/${form.slug}`}
-                  className="text-white font-medium hover:text-blue-400 transition-colors"
+                  className="text-white font-medium hover:text-white transition-colors"
                 >
                   {form.title}
                 </Link>
