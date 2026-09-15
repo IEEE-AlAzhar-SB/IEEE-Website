@@ -189,13 +189,13 @@ const Home = () => {
             </p>
             <Link
               to="/about"
-              className="group flex items-center gap-2.5 text-[#05568D] font-bold text-sm w-max transition-colors"
+              className="group inline-flex items-center gap-2.5 bg-[#05568D] hover:bg-[#033e66] text-white font-bold text-sm py-2.5 px-5 rounded-full transition-all duration-300 w-max shadow-md shadow-[#05568D]/20 transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span className="group-hover:text-[#033e66] transition-colors">
+              <span className="transition-colors">
                 See More About Us
               </span>
-              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-[#033e66] transition-all transform group-hover:translate-x-0.5 shadow-sm shadow-[#05568D]/30">
-                <FaArrowUp className="text-white transform rotate-90 text-[10px]" />
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-white transition-all transform group-hover:translate-x-0.5 shadow-sm">
+                <FaArrowUp className="text-[#05568D] transform rotate-90 text-[10px]" />
               </span>
             </Link>
           </div>

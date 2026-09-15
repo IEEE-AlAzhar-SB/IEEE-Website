@@ -73,7 +73,7 @@ const EventDetails = () => {
       <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
         <h2 className="flex flex-col items-start gap-2">
           <span
-            className={`w-fit bg-white text-[#05568D] px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
+            className={`w-fit bg-[#05568D] text-white px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
           >
             {event.title}
           </span>

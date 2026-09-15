@@ -510,7 +510,7 @@ export default function FieldBuilderModal({
             <button
               type="submit"
               disabled={isPending || !label.trim()}
-              className="px-5 py-2 bg-white text-[#05568D] rounded-xl text-sm font-semibold hover:bg-[#033e66] shadow-lg shadow-[#05568D]/10 transition disabled:opacity-50"
+              className="px-5 py-2 bg-white text-[#05568D] rounded-xl text-sm font-semibold hover:bg-white/90 shadow-lg shadow-black/20 transition disabled:opacity-50"
             >
               {isPending
                 ? isEditing

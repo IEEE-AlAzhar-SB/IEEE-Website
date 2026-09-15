@@ -30,7 +30,7 @@ const FeedbackCard = ({
               <LuUser size={14} className="text-slate-400" /> {feedback.name}
             </span>
             {isUnread && (
-              <span className="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide bg-white text-[#05568D] rounded-full animate-pulse">
+              <span className="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide bg-[#033e66] text-white rounded-full animate-pulse">
                 New Message
               </span>
             )}
