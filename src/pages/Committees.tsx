@@ -20,7 +20,7 @@ const Committees = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Failed to load committees. Please try again later.</div>;
   }
 
   return (

@@ -205,7 +205,11 @@ const About = () => {
 
         <div className="mt-16 pt-6">
           {isLoading && <p>Loading...</p>}
-          {error && <p className="text-red-600 font-bold">{error.message}</p>}
+          {error && (
+            <p className="text-red-600 font-bold">
+              Failed to load content. Please try again later.
+            </p>
+          )}
 
           {/* 🚨 العرض المصحح: نتحقق من أن lastChairmen مصفوفة ونقوم بتمريرها */}
           {!isLoading && lastChairPerson.length > 0 ? (

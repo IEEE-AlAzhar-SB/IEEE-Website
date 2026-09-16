@@ -159,7 +159,9 @@ const Board = () => {
 
         {error && (
           <div className="flex justify-center items-center h-64">
-            <p className="text-red-600 font-bold">{error.message}</p>
+            <p className="text-red-600 font-bold">
+              Failed to load board members. Please try again later.
+            </p>
           </div>
         )}
 
