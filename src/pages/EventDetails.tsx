@@ -3,6 +3,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { FaArrowUp, FaMapMarkerAlt } from "react-icons/fa";
 import { Card, CardSlider } from "../components";
 import { useEventByIdQuery, useEventBySlugQuery } from "../hooks";
+import { toSafeHttpUrl, toSafeImageSrc, isSafeSlug } from "../lib/safeUrl";
 import { usePublicFormQuery, DynamicForm } from "../features/forms";
 import { submitForm } from "../features/forms/service/forms";
 
@@ -22,14 +23,19 @@ const EventDetails = () => {
     : slugQuery;
 
   // Legacy UUID URLs redirect to the canonical slug URL once loaded.
+  // Slug is allowlisted before navigation to avoid API-driven open redirect.
   const redirectSlug = isLegacyRoute
     ? idQuery.data?.slug?.current
     : undefined;
+  const safeRedirectSlug =
+    redirectSlug && isSafeSlug(redirectSlug) ? redirectSlug : undefined;
   useEffect(() => {
-    if (redirectSlug) {
-      navigate(`/events/${redirectSlug}`, { replace: true });
+    if (safeRedirectSlug) {
+      navigate(`/events/${encodeURIComponent(safeRedirectSlug)}`, {
+        replace: true,
+      });
     }
-  }, [redirectSlug, navigate]);
+  }, [safeRedirectSlug, navigate]);
 
   if (!slug && !id) {
     return <Navigate to="/events" replace />;
@@ -56,14 +62,22 @@ const EventDetails = () => {
     );
   }
 
+  const coverSrc = toSafeImageSrc(event.coverImage?.asset.url);
+  const safeMapLink = event.venueDetails?.mapLink
+    ? toSafeHttpUrl(event.venueDetails.mapLink)
+    : null;
+  const safeRegistrationLink = event.registrationLink
+    ? toSafeHttpUrl(event.registrationLink)
+    : null;
+
   return (
     <div>
       {/* LCP hero as a real <img> (eager + high priority) instead of a CSS
           background so the browser can preload/prioritize it. */}
       <section className="relative h-[500px] w-full overflow-hidden bg-[#05568D]">
-        {event.coverImage?.asset.url ? (
+        {coverSrc ? (
           <img
-            src={event.coverImage.asset.url}
+            src={coverSrc}
             alt={event.title || "Event cover"}
             loading="eager"
             fetchPriority="high"
@@ -102,9 +116,9 @@ const EventDetails = () => {
                 )}
               </div>
             </div>
-            {event.venueDetails.mapLink && (
+            {safeMapLink && (
               <a
-                href={event.venueDetails.mapLink}
+                href={safeMapLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
@@ -155,16 +169,20 @@ const EventDetails = () => {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {event.memories.map((memory, index) => (
-              <img
-                key={`${index}-${memory.photo.asset?.url}`}
-                src={memory.photo.asset?.url ?? ""}
+            {event.memories.map((memory, index) => {
+              const src = toSafeImageSrc(memory.photo.asset?.url);
+              if (!src) return null;
+              return (
+                <img
+                  key={`${index}-${src}`}
+                  src={src}
                 alt={`Memory ${index + 1}`}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-64 object-cover rounded-lg shadow-md"
-              />
-            ))}
+                />
+              );
+            })}
           </div>
         </div>
       )}
@@ -172,8 +190,8 @@ const EventDetails = () => {
       {event.formSlug ? (
         <EventFormSection formSlug={event.formSlug} />
       ) : (
-        event.registrationLink && (
-          <ExternalRegisterSection link={event.registrationLink} />
+        safeRegistrationLink && (
+          <ExternalRegisterSection link={safeRegistrationLink} />
         )
       )}
       </div>
@@ -202,7 +220,8 @@ function ExternalRegisterSection({ link }: { link: string }) {
 }
 
 function EventFormSection({ formSlug }: { formSlug: string }) {
-  const { data: form, isLoading, error } = usePublicFormQuery(formSlug);
+  const safeSlug = isSafeSlug(formSlug) ? formSlug : "";
+  const { data: form, isLoading, error } = usePublicFormQuery(safeSlug);
 
   if (isLoading) {
     return (
