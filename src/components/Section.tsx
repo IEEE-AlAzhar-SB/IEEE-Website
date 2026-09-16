@@ -1,5 +1,3 @@
-import bubble1 from "../assets/section-bubles/bubble1.png";
-import bubble2 from "../assets/section-bubles/bubble2.png";
 import Logo from "../assets/logo.WebP";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
@@ -55,6 +53,9 @@ const Section = ({
               alt="IEEE Logo"
               className="w-9 h-9 object-contain"
               loading="lazy"
+              decoding="async"
+              width={36}
+              height={36}
             />
             <span className="text-xl md:text-2xl font-black tracking-wider text-white">
               IEEE
@@ -96,17 +97,25 @@ const Section = ({
         )}
       </div>
 
-      <img
-        src={bubble1}
-        alt="bubble1"
-        loading="lazy"
-        className="absolute top-4 left-6 md:left-12 opacity-30 md:opacity-50 w-24 md:w-36 max-w-[200px] z-10 pointer-events-none animate-float-1"
+      {/* Decorative bubbles as pure CSS (previously 4.5MB of PNGs):
+          radial-gradient circles with blur — zero bytes, GPU-friendly. */}
+      <div
+        aria-hidden="true"
+        className="absolute top-4 left-6 md:left-12 w-24 md:w-36 aspect-square rounded-full opacity-30 md:opacity-50 pointer-events-none animate-float-1 z-10"
+        style={{
+          background:
+            "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(255,255,255,0.15) 60%, transparent 70%)",
+          filter: "blur(2px)",
+        }}
       />
-      <img
-        src={bubble2}
-        alt="bubble2"
-        loading="lazy"
-        className="absolute bottom-4 right-6 md:right-16 w-24 md:w-36 max-w-[200px] z-10 opacity-30 md:opacity-50 pointer-events-none animate-float-2"
+      <div
+        aria-hidden="true"
+        className="absolute bottom-4 right-6 md:right-16 w-24 md:w-36 aspect-square rounded-full opacity-30 md:opacity-50 pointer-events-none animate-float-2 z-10"
+        style={{
+          background:
+            "radial-gradient(circle at 60% 60%, rgba(255,255,255,0.85), rgba(255,255,255,0.12) 60%, transparent 70%)",
+          filter: "blur(3px)",
+        }}
       />
     </div>
   );
