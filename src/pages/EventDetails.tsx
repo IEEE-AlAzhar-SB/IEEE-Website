@@ -58,16 +58,20 @@ const EventDetails = () => {
 
   return (
     <div>
-      <section
-        className={`relative h-[500px] w-full bg-center bg-cover ${
-          !event.coverImage?.asset.url ? "" : "bg-[#05568D]"
-        }`}
-        style={
-          event.coverImage?.asset.url
-            ? { backgroundImage: `url(${event.coverImage.asset.url})` }
-            : {}
-        }
-      />
+      {/* LCP hero as a real <img> (eager + high priority) instead of a CSS
+          background so the browser can preload/prioritize it. */}
+      <section className="relative h-[500px] w-full overflow-hidden bg-[#05568D]">
+        {event.coverImage?.asset.url ? (
+          <img
+            src={event.coverImage.asset.url}
+            alt={event.title || "Event cover"}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        ) : null}
+      </section>
 
       <div className="container mx-auto px-4 sm:px-6">
       <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
@@ -156,6 +160,8 @@ const EventDetails = () => {
                 key={`${index}-${memory.photo.asset?.url}`}
                 src={memory.photo.asset?.url ?? ""}
                 alt={`Memory ${index + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-64 object-cover rounded-lg shadow-md"
               />
             ))}

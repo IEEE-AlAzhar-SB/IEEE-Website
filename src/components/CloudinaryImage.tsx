@@ -16,7 +16,9 @@ const CloudinaryImage = ({
   className,
   eager,
 }: CloudinaryImageProps) => {
-  const widths = [400, 600, 800, 1200, 1600];
+  // Cards render at max ~450px wide; 800w covers 2x DPR. Dropping the
+  // 1600w variant avoids downloading ~2-4x bytes for no visible gain.
+  const widths = [400, 600, 800, 1200];
 
   const buildUrl = (w: number) =>
     `${BASE}/f_auto,q_auto,w_${w}/${publicId}`;
@@ -30,6 +32,7 @@ const CloudinaryImage = ({
       sizes={sizes}
       alt={alt}
       loading={eager ? "eager" : "lazy"}
+      fetchPriority={eager ? "high" : "auto"}
       decoding="async"
       className={className}
     />
