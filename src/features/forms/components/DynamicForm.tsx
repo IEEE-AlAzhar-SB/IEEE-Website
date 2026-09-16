@@ -7,6 +7,33 @@ interface DynamicFormProps {
   onSubmit: (data: Record<string, unknown>) => Promise<void>;
 }
 
+const ALLOWED_INPUT_TYPES = new Set([
+  "text",
+  "email",
+  "tel",
+  "number",
+  "url",
+  "password",
+]);
+
+const MAX_PATTERN_LENGTH = 200;
+
+/**
+ * Compile a backend-provided regex pattern defensively:
+ * - caps length (ReDoS / payload bloat)
+ * - rejects nested quantifiers, the classic catastrophic-backtracking shape
+ * - never throws (invalid patterns fail closed → field rejected)
+ */
+function compilePattern(pattern: string): RegExp | null {
+  if (pattern.length > MAX_PATTERN_LENGTH) return null;
+  if (/(\+|\*|\{[^}]*\})[^+*{]*(\+|\*|\{[^}]*\})/.test(pattern)) return null;
+  try {
+    return new RegExp(pattern);
+  } catch {
+    return null;
+  }
+}
+
 const buildInitialValues = (fields: FormField[]): Record<string, unknown> => {
   const values: Record<string, unknown> = {};
   for (const field of fields) {
@@ -84,8 +111,11 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
     }
 
     if (field.validation && value !== "" && value != null) {
-      if (field.type === "number" || field.type === "date") {
+      if (field.type === "number") {
         const num = Number(value);
+        if (!Number.isFinite(num)) {
+          return field.errorMessages?.min || "Invalid number.";
+        }
         if (field.validation.min != null && num < field.validation.min) {
           return (
             field.errorMessages?.min ||
@@ -96,6 +126,26 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
           return (
             field.errorMessages?.max ||
             `Maximum value is ${field.validation.max}.`
+          );
+        }
+      } else if (field.type === "date") {
+        // Compare dates as ISO strings (lexicographic = chronological),
+        // never via Number() which yields NaN and silently passes.
+        const str = String(value);
+        const time = Date.parse(str);
+        if (Number.isNaN(time)) {
+          return "Invalid date.";
+        }
+        if (field.validation.min != null && str < String(field.validation.min)) {
+          return (
+            field.errorMessages?.min ||
+            `Earliest date is ${field.validation.min}.`
+          );
+        }
+        if (field.validation.max != null && str > String(field.validation.max)) {
+          return (
+            field.errorMessages?.max ||
+            `Latest date is ${field.validation.max}.`
           );
         }
       }
@@ -118,11 +168,14 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
             `Maximum length is ${field.validation.maxLength}.`
           );
         }
-        if (
-          field.validation.pattern &&
-          !new RegExp(field.validation.pattern).test(value)
-        ) {
-          return field.errorMessages?.pattern || "Invalid format.";
+        if (field.validation.pattern) {
+          const re = compilePattern(field.validation.pattern);
+          if (!re) {
+            return "Invalid field configuration. Please contact support.";
+          }
+          if (value.length > 2000 || !re.test(value)) {
+            return field.errorMessages?.pattern || "Invalid format.";
+          }
         }
       }
     }
@@ -188,15 +241,24 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
           if (colonIdx > 0) {
             const key = part.substring(0, colonIdx).trim();
             if (sortedFields.some((f) => f.key === key)) {
-              apiFieldErrors[key] = part.substring(colonIdx + 1).trim();
+              apiFieldErrors[key] = part
+                .substring(colonIdx + 1)
+                .trim()
+                .slice(0, 300);
             }
           }
         }
         if (Object.keys(apiFieldErrors).length > 0) {
           setFieldErrors(apiFieldErrors);
+          // Don't echo the raw backend message verbatim — it may contain
+          // internals. Field-level messages above are enough.
+          setError("Please review the highlighted fields.");
+          return;
         }
+        // Generic fallback for unparsed 400s (no internal leakage).
+        message = "Submission failed. Please check your input and try again.";
       }
-      setError(message);
+      setError(message.slice(0, 300));
     } finally {
       setSubmitting(false);
     }
@@ -362,15 +424,22 @@ const DynamicForm = ({ form, onSubmit }: DynamicFormProps) => {
               />
             ) : (
               <input
-                type={field.type}
+                type={
+                  ALLOWED_INPUT_TYPES.has(field.type) ? field.type : "text"
+                }
                 name={field.key}
                 required={field.required}
                 placeholder={field.placeholder}
                 value={values[field.key] as string | number}
                 onChange={handleChange}
                 minLength={field.validation?.minLength}
-                maxLength={field.validation?.maxLength}
-                pattern={field.validation?.pattern}
+                maxLength={field.validation?.maxLength ?? 2000}
+                pattern={
+                  field.validation?.pattern &&
+                  compilePattern(field.validation.pattern)
+                    ? field.validation.pattern
+                    : undefined
+                }
                 min={field.validation?.min}
                 max={field.validation?.max}
                 className={baseClass}
