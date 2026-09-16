@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useMemo, useState } from "react";
 
 import { useBoardQuery } from "../hooks";
 import { Section, CardSlider, Card, BoardYearSelector } from "../components";
@@ -31,18 +31,51 @@ const Board = () => {
     memberType: "officer,technical,operation,branding",
   });
 
-  // Explicitly separate flat lists from the nested technical object to stop type-fighting
-  const flatBoardData: Record<Exclude<BoardMemberType, "technical">, BoardMember[]> = {
-    officer: data?.officer ?? [],
-    branding: data?.branding ?? [],
-    operation: data?.operation ?? [],
-  };
+  // Memoize derived data so year/type switches don't recompute on
+  // every render; renderers are stable callbacks for memoized sliders.
+  const flatBoardData = useMemo(
+    () => ({
+      officer: data?.officer ?? [],
+      branding: data?.branding ?? [],
+      operation: data?.operation ?? [],
+    }),
+    [data],
+  );
 
-  const technicalData: Record<string, BoardMember[]> = data?.technical ?? {};
+  const technicalData: Record<string, BoardMember[]> = useMemo(
+    () => data?.technical ?? {},
+    [data],
+  );
+
+  const fallbackGender = data?.officer?.[0]?.gender;
+
+  // Extracted slider renderer to keep the code DRY
+  const renderSlider = useCallback(
+    (members: BoardMember[]) => (
+      <CardSlider
+        cards={members.map((member) => {
+          const position = selectMemberPosition(member, fallbackGender);
+
+          return (
+            <Card
+              key={member.id}
+              name={member.name}
+              text={position}
+              imageSrc={member.image_url}
+              linkedinLink={member.linkedin_url}
+              publicId={member.image_public_id}
+            />
+          );
+        })}
+      />
+    ),
+    [fallbackGender],
+  );
 
   // Standard renderer for normal flat sections
-  const renderStandardSection = (title: string, subtitle: string, members: BoardMember[]) => {
-    if (!members || members.length === 0) return null;
+  const renderStandardSection = useCallback(
+    (title: string, subtitle: string, members: BoardMember[]) => {
+      if (!members || members.length === 0) return null;
 
     return (
       <Fragment key={title}>
@@ -58,13 +91,16 @@ const Board = () => {
         </div>
         {renderSlider(members)}
       </Fragment>
-    );
-  };
+      );
+    },
+    [renderSlider],
+  );
 
   // Dedicated renderer for the technical section and its sub-tracks
-  const renderTechnicalSection = (mainTitle: string, subtitle: string) => {
-    const trackEntries = Object.entries(technicalData);
-    if (trackEntries.length === 0) return null;
+  const renderTechnicalSection = useCallback(
+    (mainTitle: string, subtitle: string) => {
+      const trackEntries = Object.entries(technicalData);
+      if (trackEntries.length === 0) return null;
 
     return (
       <Fragment key={mainTitle}>
@@ -96,30 +132,12 @@ const Board = () => {
           })}
         </div>
       </Fragment>
-    );
-  };
-
-  // Extracted slider renderer to keep the code DRY
-  const renderSlider = (members: BoardMember[]) => (
-    <CardSlider
-      cards={members.map((member) => {
-        // Fallback to avoid breaking if officer array data is empty during initial load
-        const fallbackGender = data?.officer?.[0]?.gender;
-        const position = selectMemberPosition(member, fallbackGender);
-
-        return (
-          <Card
-            key={member.id}
-            name={member.name}
-            text={position}
-            imageSrc={member.image_url}
-            linkedinLink={member.linkedin_url}
-            publicId={member.image_public_id}
-          />
-        );
-      })}
-    />
+      );
+    },
+    [technicalData, renderSlider],
   );
+
+  // Extracted slider renderer to keep the code DRY (removed duplicate)
 
   return (
     <div className="w-full overflow-hidden bg-gray-50/50">

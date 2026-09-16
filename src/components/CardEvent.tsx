@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowUp } from "react-icons/fa";
 
@@ -38,6 +39,7 @@ const Card = ({
           alt={title || "Event Image"}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 rounded-xl shadow-inner pointer-events-none"></div>
       </div>
@@ -100,4 +102,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default memo(Card);

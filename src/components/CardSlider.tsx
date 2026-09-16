@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -8,20 +9,29 @@ export interface CardSliderProps {
   cards: React.ReactNode[];
 }
 
-export default function CardSlider({ cards }: CardSliderProps) {
-  const finalCards =
-    cards &&
-    cards.length > 0 &&
-    cards.map((card, index) => (
-      <SwiperSlide
-        key={index}
-        className="flex justify-center px-2 py-4 h-auto"
-      >
-        <div className="w-full h-full max-w-[420px] md:max-w-[450px]">
-          {card}
-        </div>
-      </SwiperSlide>
-    ));
+function CardSlider({ cards }: CardSliderProps) {
+  // Memoize slide wrappers so a parent re-render doesn't rebuild every
+  // SwiperSlide. Prefer the inner element's key for stable reconciliation.
+  const finalCards = useMemo(
+    () =>
+      cards?.map((card, index) => {
+        const innerKey =
+          card && typeof card === "object" && "key" in card && card.key != null
+            ? String(card.key)
+            : `slide-${index}`;
+        return (
+          <SwiperSlide
+            key={innerKey}
+            className="flex justify-center px-2 py-4 h-auto"
+          >
+            <div className="w-full h-full max-w-[420px] md:max-w-[450px]">
+              {card}
+            </div>
+          </SwiperSlide>
+        );
+      }),
+    [cards],
+  );
 
   return (
     <div className="w-full mx-auto relative group/slider">
@@ -133,3 +143,5 @@ export default function CardSlider({ cards }: CardSliderProps) {
     </div>
   );
 }
+
+export default memo(CardSlider);

@@ -92,15 +92,17 @@ export const useBoardMembers = () => {
   }, [boardData]);
 
   const totalCount = members.length;
-  const officerCount = members.filter(
-    (member) => member.memberType === "officer",
-  ).length;
+  const officerCount = useMemo(
+    () => members.filter((member) => member.memberType === "officer").length,
+    [members],
+  );
   const currentYear = Number(
     boardYears?.[boardYears.length - 1] ?? new Date().getFullYear(),
   );
-  const currentYearCount = members.filter(
-    (member) => member.boardYear === currentYear,
-  ).length;
+  const currentYearCount = useMemo(
+    () => members.filter((member) => member.boardYear === currentYear).length,
+    [members, currentYear],
+  );
 
   const { mutate: createMember, isPending: isCreating } =
     useCreateBoardMember();
