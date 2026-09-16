@@ -43,7 +43,7 @@ export const getEvents = async (): Promise<SanityEvent[]> => {
 };
 
 export const getEventById = async (id: string): Promise<SanityEvent> => {
-  const res = await fetch(`/api/v1/events/${id}`);
+  const res = await fetch(`/api/v1/events/${encodeURIComponent(id)}`);
   await throwIfNotOk(res);
   const json = await res.json();
   return (json.data ?? json) as SanityEvent;

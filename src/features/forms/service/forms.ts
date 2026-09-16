@@ -16,7 +16,9 @@ import {
 export const getPublicForm = async (
   slug: string,
 ): Promise<PublicFormDTO | null> => {
-  const res = await fetch(`/api/v1/forms/${slug}`, { credentials: "omit" });
+  const res = await fetch(`/api/v1/forms/${encodeURIComponent(slug)}`, {
+    credentials: "omit",
+  });
   if (res.status === 404) return null;
   await throwIfNotOk(res);
   const json = await res.json();
@@ -31,7 +33,8 @@ export const submitForm = async (
   submitterEmail: string;
   submittedAt: string;
 }> => {
-  const res = await fetch(`/api/v1/forms/${slug}/submissions`, {
+  const res = await fetch(
+    `/api/v1/forms/${encodeURIComponent(slug)}/submissions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "omit",
@@ -58,9 +61,12 @@ export const listForms = async (): Promise<AdminFormDTO[]> => {
 };
 
 export const getFormDetail = async (slug: string): Promise<AdminFormDTO> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}`, {
-    credentials: "include",
-  });
+  const res = await fetch(
+    `/api/v1/admin/forms/${encodeURIComponent(slug)}`,
+    {
+      credentials: "include",
+    },
+  );
   await throwIfNotOk(res);
   const json = await res.json();
   return json.data as AdminFormDTO;
@@ -84,7 +90,7 @@ export const updateForm = async (
   slug: string,
   input: UpdateFormInput,
 ): Promise<AdminFormDTO> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}`, {
     method: "PATCH",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -99,7 +105,7 @@ export const updateFormStatus = async (
   slug: string,
   status: "active" | "closed",
 ): Promise<AdminFormDTO> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/status`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/status`, {
     method: "PATCH",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -111,7 +117,7 @@ export const updateFormStatus = async (
 };
 
 export const deleteForm = async (slug: string): Promise<void> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}`, {
     method: "DELETE",
     credentials: "include",
   });
@@ -126,7 +132,7 @@ export const addField = async (
   slug: string,
   input: AddFieldInput,
 ): Promise<FormField> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/fields`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/fields`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -142,7 +148,7 @@ export const updateField = async (
   fieldKey: string,
   input: UpdateFieldInput,
 ): Promise<FormField> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/fields/${fieldKey}`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/fields/${encodeURIComponent(fieldKey)}`, {
     method: "PATCH",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -157,7 +163,7 @@ export const deleteField = async (
   slug: string,
   fieldKey: string,
 ): Promise<void> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/fields/${fieldKey}`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/fields/${encodeURIComponent(fieldKey)}`, {
     method: "DELETE",
     credentials: "include",
   });
@@ -170,7 +176,7 @@ export const reorderFields = async (
   slug: string,
   orderedKeys: string[],
 ): Promise<void> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/fields/reorder`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/fields/reorder`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -189,7 +195,7 @@ export const getSubmissions = async (
   limit = 50,
 ): Promise<SubmissionsResponse> => {
   const res = await fetch(
-    `/api/v1/admin/forms/${slug}/submissions?page=${page}&limit=${limit}`,
+    `/api/v1/admin/forms/${encodeURIComponent(slug)}/submissions?page=${page}&limit=${limit}`,
     { credentials: "include" },
   );
   await throwIfNotOk(res);
@@ -198,7 +204,7 @@ export const getSubmissions = async (
 };
 
 export const getExportData = async (slug: string): Promise<ExportResponse> => {
-  const res = await fetch(`/api/v1/admin/forms/${slug}/submissions/export`, {
+  const res = await fetch(`/api/v1/admin/forms/${encodeURIComponent(slug)}/submissions/export`, {
     credentials: "include",
   });
   await throwIfNotOk(res);
