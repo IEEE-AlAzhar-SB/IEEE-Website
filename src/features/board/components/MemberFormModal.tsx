@@ -65,6 +65,21 @@ const MemberFormModal = ({
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
+    if (file) {
+      // Client-side guard only (backend MUST re-validate): raster images,
+      // 10 MB max to match the UI copy. SVG is rejected (script-capable).
+      const allowed = ["image/jpeg", "image/png", "image/webp"];
+      if (!allowed.includes(file.type)) {
+        e.target.value = "";
+        onFileChange(null);
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        e.target.value = "";
+        onFileChange(null);
+        return;
+      }
+    }
     onFileChange(file);
   };
 

@@ -6,6 +6,7 @@ import { LuShieldCheck, LuMenu } from "react-icons/lu";
 import { FeedbackDashboard } from "../pages";
 import { SideBarContent } from "../components";
 import { signOut } from "../lib/auth-client";
+import { toFriendlyErrorMessage, type ApiError } from "../lib/apiError";
 import FormsDashboard from "./FormsDashboard";
 import FormDetailDashboard from "./FormDetailDashboard";
 import {
@@ -66,8 +67,25 @@ function Dashboard() {
   const [memberIdToDelete, setMemberIdToDelete] = useState<string | null>(null);
 
   const handleLogout = async () => {
-    await signOut();
+    try {
+      await signOut();
+    } catch {
+      setFormError("Sign out failed. Please check your connection.");
+      return;
+    }
     navigate("/login");
+  };
+
+  /** Show backend validation detail only for 400s; generic otherwise. */
+  const describeMemberError = (err: unknown, fallback: string) => {
+    const status = (err as ApiError)?.status;
+    if (status === 400 && err instanceof Error) {
+      return err.message.slice(0, 300);
+    }
+    if (err instanceof Error && /avatar|image|large|size/i.test(err.message)) {
+      return err.message.slice(0, 300);
+    }
+    return toFriendlyErrorMessage(err) || fallback;
   };
 
   const openAddModal = () => {
@@ -128,6 +146,14 @@ function Dashboard() {
     formData.append("boardYear", currentMember.boardYear.toString());
 
     if (selectedFile) {
+      const allowed = ["image/jpeg", "image/png", "image/webp"];
+      if (
+        !allowed.includes(selectedFile.type) ||
+        selectedFile.size > 10 * 1024 * 1024
+      ) {
+        setFormError("Avatar must be a JPEG, PNG, or WebP image under 10MB.");
+        return;
+      }
       formData.append("avatar", selectedFile);
     }
 
@@ -139,8 +165,8 @@ function Dashboard() {
             setFormError(null);
             setIsModalOpen(false);
           },
-          onError: (err: any) => {
-            setFormError(err.message || "Failed to update member.");
+          onError: (err: unknown) => {
+            setFormError(describeMemberError(err, "Failed to update member."));
           },
         },
       );
@@ -152,8 +178,10 @@ function Dashboard() {
             setFormError(null);
             setIsModalOpen(false);
           },
-          onError: (err: any) => {
-            setFormError(err.message || "Failed to create member.");
+          onError: (err: unknown) => {
+            setFormError(
+              describeMemberError(err, "Failed to create member."),
+            );
           },
         },
       );
@@ -168,6 +196,20 @@ function Dashboard() {
   };
 
   const handleFileChange = (file: File | null) => {
+    if (file) {
+      const allowed = ["image/jpeg", "image/png", "image/webp"];
+      if (!allowed.includes(file.type)) {
+        setFormError("Avatar must be a JPEG, PNG, or WebP image.");
+        setSelectedFile(null);
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        setFormError("Avatar must not be larger than 10MB.");
+        setSelectedFile(null);
+        return;
+      }
+      setFormError(null);
+    }
     setSelectedFile(file);
   };
 
@@ -188,8 +230,10 @@ function Dashboard() {
           setIsDeleteModalOpen(false);
           setMemberIdToDelete(null);
         },
-        onError: (err: any) => {
-          setDeleteError(err.message || "Failed to delete member.");
+        onError: (err: unknown) => {
+          setDeleteError(
+            describeMemberError(err, "Failed to delete member."),
+          );
         },
       },
     );
@@ -278,7 +322,9 @@ function Dashboard() {
                     members={members}
                     isLoading={isLoading}
                     isError={isError}
-                    errorMessage={error?.message}
+                    errorMessage={
+                      error ? toFriendlyErrorMessage(error) : undefined
+                    }
                     onRetry={refetch}
                     onEdit={openEditModal}
                     onDelete={triggerDeleteModal}
