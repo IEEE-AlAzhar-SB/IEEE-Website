@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowUp } from "react-icons/fa";
+import { toSafeHttpUrl, isSafeSlug } from "../lib/safeUrl";
 
 interface CardProps {
   image: string;
@@ -28,7 +29,13 @@ const Card = ({
   slug,
   id,
 }: CardProps) => {
-  const detailsPath = slug ? `/events/${slug}` : `/eventdetails/${id}`;
+  const safeSlug = slug && isSafeSlug(slug) ? slug : null;
+  const detailsPath = safeSlug
+    ? `/events/${encodeURIComponent(safeSlug)}`
+    : id
+      ? `/eventdetails/${encodeURIComponent(id)}`
+      : "/events";
+  const safeRegistration = toSafeHttpUrl(registrationLink);
   return (
     <div
       className={`group w-full h-full max-w-[650px] bg-white shadow-md hover:shadow-xl rounded-2xl p-4 md:p-5 flex flex-col gap-5 mx-auto transition-all duration-300 hover:-translate-y-1 ${className}`}
@@ -85,16 +92,18 @@ const Card = ({
             </span>
           </Link>
 
-          {registrationLink && (
-            <Link
-              to={registrationLink}
+          {safeRegistration && (
+            <a
+              href={safeRegistration}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-[#05568D]/10 transform active:scale-95"
             >
               <span>Register</span>
               <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white transition-transform group-hover:translate-x-0.5">
                 <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
               </span>
-            </Link>
+            </a>
           )}
         </div>
       </div>

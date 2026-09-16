@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import CloudinaryImage from "./CloudinaryImage";
+import { toSafeHttpUrl, toSafeImageSrc } from "../lib/safeUrl";
 
 interface CardProps {
   imageSrc: string;
@@ -23,6 +24,10 @@ const CardMember = ({
   linkedinLink,
   publicId,
 }: CardProps) => {
+  const safeFacebook = toSafeHttpUrl(facebookLink);
+  const safeInstagram = toSafeHttpUrl(instagramLink);
+  const safeLinkedin = toSafeHttpUrl(linkedinLink);
+  const safeImageSrc = toSafeImageSrc(imageSrc);
   return (
     <div className="group relative w-full aspect-[3/4] max-w-[340px] sm:max-w-[400px] md:max-w-[450px] mx-auto rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
       {publicId ? (
@@ -32,15 +37,15 @@ const CardMember = ({
           alt={name || "Team Member"}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-      ) : (
+      ) : safeImageSrc ? (
         <img
-          src={imageSrc}
+          src={safeImageSrc}
           alt={name || "Team Member"}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
           decoding="async"
         />
-      )}
+      ) : null}
 
       <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-md rounded-xl p-3 sm:p-4 flex flex-col items-center justify-between border border-white/40 shadow-lg transition-all duration-300 group-hover:bg-white/90">
         <div className="w-full text-center space-y-1 capitalize">
@@ -53,9 +58,9 @@ const CardMember = ({
         </div>
 
         <div className="flex justify-center items-center gap-4 mt-3">
-          {facebookLink && (
+          {safeFacebook && (
             <a
-              href={facebookLink}
+              href={safeFacebook}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-slate-900 text-white hover:bg-[#05568D] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
@@ -65,9 +70,9 @@ const CardMember = ({
             </a>
           )}
 
-          {instagramLink && (
+          {safeInstagram && (
             <a
-              href={instagramLink}
+              href={safeInstagram}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-slate-900 text-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:to-[#ee2a7b] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
@@ -77,9 +82,9 @@ const CardMember = ({
             </a>
           )}
 
-          {linkedinLink && (
+          {safeLinkedin && (
             <a
-              href={linkedinLink}
+              href={safeLinkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-slate-900 text-white hover:bg-[#05568D] rounded-full w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-sm"
