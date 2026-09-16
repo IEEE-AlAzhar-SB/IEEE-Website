@@ -68,7 +68,7 @@ export const createBoardMember = async ({ formData }: CreateMemberDTO) => {
 };
 
 export const updateBoardMember = async ({ id, formData }: UpdateMemberDTO) => {
-  const res = await fetch(`/api/v1/board/${id}`, {
+  const res = await fetch(`/api/v1/board/${encodeURIComponent(id)}`, {
     method: "PATCH",
     credentials: "include",
     body: formData,
@@ -79,7 +79,7 @@ export const updateBoardMember = async ({ id, formData }: UpdateMemberDTO) => {
 };
 
 export const deleteBoardMember = async ({ id }: DeleteMemberDTO) => {
-  const res = await fetch(`/api/v1/board/${id}`, {
+  const res = await fetch(`/api/v1/board/${encodeURIComponent(id)}`, {
     method: "DELETE",
     credentials: "include",
   });

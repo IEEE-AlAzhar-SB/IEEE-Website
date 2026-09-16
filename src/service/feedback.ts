@@ -55,7 +55,8 @@ export const updateFeedbackStatus = async ({
   id,
   status,
 }: UpdateFeedbackStatusDTO) => {
-  const res = await fetch(`/api/v1/feedback/${id}/status`, {
+  const res = await fetch(
+    `/api/v1/feedback/${encodeURIComponent(id)}/status`, {
     method: "PATCH",
     credentials: "include",
     headers: {
@@ -68,7 +69,7 @@ export const updateFeedbackStatus = async ({
 };
 
 export const deleteFeedback = async ({ id }: DeleteFeedbackDTO) => {
-  const res = await fetch(`/api/v1/feedback/${id}`, {
+  const res = await fetch(`/api/v1/feedback/${encodeURIComponent(id)}`, {
     method: "DELETE",
     credentials: "include",
   });
