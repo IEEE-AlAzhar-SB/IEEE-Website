@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
@@ -48,6 +49,47 @@ const Home = () => {
   const officers: BoardMember[] = data?.officer ?? [];
 
   const { data: events } = useEventsQuery();
+
+  // Avoid rebuilding card arrays (and remounting the Swiper) on every
+  // parent render; dates are formatted once per events payload.
+  const eventCards = useMemo(
+    () =>
+      events?.map((event) => (
+        <CardEvent
+          key={event._id}
+          id={event._id}
+          slug={event.slug?.current}
+          image={event.coverImage?.asset?.url ?? "image not found"}
+          title={event.title}
+          text={event.subtitle ?? "subtitle not found"}
+          date={`${new Date(event.startDate).toLocaleDateString()} - ${event.endDate ? new Date(event.endDate).toLocaleDateString() : "TBD"}`}
+          secondData={
+            event.startDateSecondV
+              ? `${new Date(event.startDateSecondV).toLocaleDateString()} - ${event.endDateSecondV ? new Date(event.endDateSecondV).toLocaleDateString() : "TBD"}`
+              : undefined
+          }
+          registrationLink={event.registrationLink}
+          location={event.location ?? "location not found"}
+        />
+      )) ?? [],
+    [events],
+  );
+
+  const officerCards = useMemo(
+    () =>
+      officers.map((officer) => (
+        <Card
+          key={officer.id}
+          imageSrc={officer.image_url}
+          name={officer.name}
+          text={`${selectMemberPosition(officer, officers[0]?.gender)}`}
+          linkedinLink={officer.linkedin_url}
+          publicId={officer.image_public_id}
+        />
+      )),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data],
+  );
 
   return (
     <div className="overflow-x-hidden bg-slate-50/50">
@@ -102,7 +144,11 @@ const Home = () => {
                 src={Logo}
                 alt="IEEE Logo"
                 className="w-10 h-10 object-contain animate-pulse duration-3000"
-                loading="lazy"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                width={40}
+                height={40}
               />
               <span className="text-2xl font-black tracking-wider text-white">
                 IEEE
@@ -136,7 +182,9 @@ const Home = () => {
                   key={`${index}-${item.alt}`}
                   src={item.src}
                   alt={item.alt}
-                  loading="lazy"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  decoding="async"
                   className={item.className}
                 />
               ))
@@ -173,6 +221,7 @@ const Home = () => {
               alt="About Section"
               className="w-full max-w-sm rounded-2xl shadow-xl border border-slate-200/60 object-cover transform transition duration-500 group-hover:scale-[1.02]"
               loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="space-y-6">
@@ -215,30 +264,7 @@ const Home = () => {
 
       {/*  Events Slider Container */}
       <div className="mt-2 mb-12 container mx-auto">
-        {events && (
-          <CardSlider
-            cards={events.map((event) => (
-              <CardEvent
-                key={event._id}
-                id={event._id}
-                slug={event.slug?.current}
-                image={event.coverImage?.asset?.url ?? "image not found"}
-                title={event.title}
-                text={event.subtitle ?? "subtitle not found"}
-                date={`${new Date(event.startDate).toLocaleDateString()} - ${event.endDate ? new Date(event.endDate).toLocaleDateString() : "TBD"}`}
-                secondData={
-                  event.startDateSecondV
-                    ? `${new Date(event.startDateSecondV).toLocaleDateString()} - ${event.endDateSecondV ? new Date(event.endDateSecondV).toLocaleDateString() : "TBD"}`
-                    : undefined
-                }
-                registrationLink={event.registrationLink}
-                location={event.location ?? "location not found"}
-              />
-            ))}
-          >
-            {/* لن تعمل بهذه الطريقة، يجب تمريرها كـ cards */}
-          </CardSlider>
-        )}
+        {events && <CardSlider cards={eventCards} />}
       </div>
 
       {/*  Committees Section */}
@@ -304,18 +330,7 @@ const Home = () => {
       </div>
 
       <div className="mt-6 mb-16 mx-auto container">
-          <CardSlider
-            cards={officers.map((officer) => (
-              <Card
-                key={officer.id}
-                imageSrc={officer.image_url}
-                name={officer.name}
-                text={`${selectMemberPosition(officer, officers[0]?.gender)}`}
-                linkedinLink={officer.linkedin_url}
-                publicId={officer.image_public_id}
-              />
-            ))}
-          />
+        <CardSlider cards={officerCards} />
       </div>
     </div>
   );
