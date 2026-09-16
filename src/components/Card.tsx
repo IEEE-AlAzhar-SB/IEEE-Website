@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import CloudinaryImage from "./CloudinaryImage";
 
@@ -37,6 +38,7 @@ const CardMember = ({
           alt={name || "Team Member"}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          decoding="async"
         />
       )}
 
@@ -92,4 +94,4 @@ const CardMember = ({
   );
 };
 
-export default CardMember;
+export default memo(CardMember);

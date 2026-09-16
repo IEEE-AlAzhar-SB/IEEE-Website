@@ -1,8 +1,22 @@
+import { useMemo } from "react";
 import { useEventsQuery } from "../hooks";
 import { Section, CardEvent } from "../components";
 
+const formatEventDate = (startDate: string, endDate?: string) =>
+  `${new Date(startDate).toLocaleDateString()} - ${endDate ? new Date(endDate).toLocaleDateString() : "TBD"}`;
+
 const Events = () => {
   const { data: events } = useEventsQuery();
+
+  // Format dates once per payload instead of on every render.
+  const renderedEvents = useMemo(
+    () =>
+      events?.map((event) => ({
+        event,
+        date: formatEventDate(event.startDate, event.endDate),
+      })) ?? [],
+    [events],
+  );
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -27,8 +41,8 @@ const Events = () => {
 
       {/* Events Grid Container */}
       <div className="px-4 sm:px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 gap-6 container mx-auto mb-12">
-        {events?.map((event, index) => {
-          const count = events?.length ?? 0;
+        {renderedEvents.map(({ event, date }, index) => {
+          const count = renderedEvents.length;
           const isFirst = index === 0;
           const isLast = index === count - 1;
           const isOrphan =
@@ -45,7 +59,7 @@ const Events = () => {
                 image={event.coverImage?.asset?.url ?? ""}
                 title={event.title}
                 text={event.subtitle ?? ""}
-                date={`${new Date(event.startDate).toLocaleDateString()} - ${event.endDate ? new Date(event.endDate).toLocaleDateString() : "TBD"}`}
+                date={date}
                 location={event.location ?? ""}
                 className={`${isFullWidth ? "grid grid-cols-1 lg:grid-cols-2 lg:max-w-none" : ""}`}
               />
