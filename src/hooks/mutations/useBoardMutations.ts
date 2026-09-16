@@ -146,22 +146,22 @@ export const useUpdateBoardMember = () => {
           }
         });
       } catch (err) {
-        console.error(
-          "[board-mutation][update][onMutate] optimistic patch error",
-          err,
-        );
+        if (import.meta.env.DEV) {
+          console.error(
+            "[board-mutation][update][onMutate] optimistic patch error",
+            err,
+          );
+        }
       }
 
       return { previous };
     },
 
-    onError: (err, variables, context) => {
-      console.error(
-        "[useUpdateBoardMember][onError] Mutation failed. Error:",
-        err,
-        "Variables:",
-        variables,
-      );
+    onError: (err, _variables, context) => {
+      // Never log mutation variables: they contain member PII / FormData.
+      if (import.meta.env.DEV) {
+        console.error("[useUpdateBoardMember][onError] Mutation failed.", err);
+      }
       context?.previous?.forEach(([queryKey, data]) => {
         queryClient.setQueryData(queryKey as unknown[], data);
       });
@@ -219,23 +219,28 @@ export const useUpdateBoardMember = () => {
                 exact: true,
               });
             } catch (refErr) {
-              console.error(
-                "[board-mutation][update][onSuccess] refetch error for key=",
-                k,
-                refErr,
-              );
+              if (import.meta.env.DEV) {
+                console.error(
+                  "[board-mutation][update][onSuccess] refetch error",
+                  refErr,
+                );
+              }
             }
           }
         } else {
-          console.warn(
-            "[useUpdateBoardMember][onSuccess] No memberId found, skipping manual cache patching.",
-          );
+          if (import.meta.env.DEV) {
+            console.warn(
+              "[useUpdateBoardMember][onSuccess] No memberId found, skipping manual cache patching.",
+            );
+          }
         }
       } catch (err) {
-        console.error(
-          "[board-mutation][update][onSuccess] patch cache error",
-          err,
-        );
+        if (import.meta.env.DEV) {
+          console.error(
+            "[board-mutation][update][onSuccess] patch cache error",
+            err,
+          );
+        }
       }
       // Invalidate to trigger fresh refetches for any remaining entries
       queryClient.invalidateQueries({
@@ -294,10 +299,12 @@ export const useDeleteBoardMember = () => {
           }
         });
       } catch (err) {
-        console.error(
-          "[board-mutation][delete][onMutate] optimistic delete error",
-          err,
-        );
+        if (import.meta.env.DEV) {
+          console.error(
+            "[board-mutation][delete][onMutate] optimistic delete error",
+            err,
+          );
+        }
       }
 
       return { previous };

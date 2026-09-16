@@ -12,6 +12,7 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { useEventsQuery } from "../hooks";
+import { toFriendlyErrorMessage } from "../lib/apiError";
 import {
   DynamicForm,
   FormStatusBadge,
@@ -107,7 +108,10 @@ function FormDetailDashboard() {
   const handleStatusChange = (status: "active" | "closed") => {
     updateStatusMutation.mutate(status, {
       onError: (err) => {
-        setToast({ message: err.message || "Failed to update status.", type: "error" });
+        setToast({
+          message: toFriendlyErrorMessage(err) || "Failed to update status.",
+          type: "error",
+        });
       },
     });
   };
@@ -119,7 +123,9 @@ function FormDetailDashboard() {
         setSettingsError(null);
       },
       onError: (err) => {
-        setSettingsError(err.message || "Failed to update form.");
+        setSettingsError(
+          toFriendlyErrorMessage(err) || "Failed to update form.",
+        );
       },
     });
   };
@@ -131,7 +137,7 @@ function FormDetailDashboard() {
         setFieldError(null);
       },
       onError: (err) => {
-        setFieldError(err.message || "Failed to add field.");
+        setFieldError(toFriendlyErrorMessage(err) || "Failed to add field.");
       },
     });
   };
@@ -147,7 +153,9 @@ function FormDetailDashboard() {
           setFieldError(null);
         },
         onError: (err) => {
-          setFieldError(err.message || "Failed to update field.");
+          setFieldError(
+            toFriendlyErrorMessage(err) || "Failed to update field.",
+          );
         },
       },
     );
@@ -159,7 +167,10 @@ function FormDetailDashboard() {
         setDeletingFieldKey(null);
       },
       onError: (err) => {
-        setToast({ message: err.message || "Failed to delete field.", type: "error" });
+        setToast({
+          message: toFriendlyErrorMessage(err) || "Failed to delete field.",
+          type: "error",
+        });
         setDeletingFieldKey(null);
       },
     });
@@ -272,7 +283,9 @@ function FormDetailDashboard() {
           <LuArrowLeft size={16} /> Back to Forms
         </button>
         <ErrorBanner
-          message={error?.message || "Failed to load form details."}
+          message={
+            error ? toFriendlyErrorMessage(error) : "Failed to load form details."
+          }
           onRetry={refetch}
         />
       </main>

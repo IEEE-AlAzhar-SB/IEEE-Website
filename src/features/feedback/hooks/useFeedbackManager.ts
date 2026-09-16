@@ -4,6 +4,7 @@ import {
   useUpdateFeedbackStatus,
   useDeleteFeedback,
 } from "../../../hooks/mutations/useFeedbackMutations";
+import { toFriendlyErrorMessage } from "../../../lib/apiError";
 import { FeedbackItem, FeedbackStatus } from "../../../service/feedback";
 
 export type { FeedbackItem, FeedbackStatus };
@@ -44,8 +45,10 @@ export const useFeedbackManager = () => {
           setIsDeleteModalOpen(false);
           setFeedbackIdToDelete(null);
         },
-        onError: (err: any) => {
-          setDeleteError(err.message || "Failed to delete feedback.");
+        onError: (err: unknown) => {
+          setDeleteError(
+            toFriendlyErrorMessage(err) || "Failed to delete feedback.",
+          );
         },
       }
     );
@@ -56,8 +59,10 @@ export const useFeedbackManager = () => {
     updateStatus(
       { id, status: newStatus },
       {
-        onError: (err: any) => {
-          setMutationError(err.message || "Failed to update feedback status.");
+        onError: (err: unknown) => {
+          setMutationError(
+            toFriendlyErrorMessage(err) || "Failed to update feedback status.",
+          );
         },
       }
     );

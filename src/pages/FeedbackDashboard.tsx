@@ -13,6 +13,7 @@ import {
   useFeedbackManager,
 } from "../features/feedback";
 import { ToastNotification } from "../components";
+import { toFriendlyErrorMessage } from "../lib/apiError";
 
 function FeedbackDashboard() {
   const {
@@ -75,7 +76,9 @@ function FeedbackDashboard() {
 
       {isError && (
         <ErrorBanner
-          message={error?.message || "Failed to load feedbacks."}
+          message={
+            error ? toFriendlyErrorMessage(error) : "Failed to load feedbacks."
+          }
           onRetry={refetch}
         />
       )}

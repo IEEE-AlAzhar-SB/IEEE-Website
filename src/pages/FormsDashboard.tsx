@@ -18,6 +18,7 @@ import {
 } from "../features/forms";
 import { useEventsQuery } from "../hooks";
 import { ToastNotification } from "../components";
+import { toFriendlyErrorMessage } from "../lib/apiError";
 
 function FormsDashboard() {
   const {
@@ -55,7 +56,9 @@ function FormsDashboard() {
         setSlugToDelete(null);
       },
       onError: (err) => {
-        setDeleteError(err.message || "Failed to delete form.");
+        setDeleteError(
+          toFriendlyErrorMessage(err) || "Failed to delete form.",
+        );
       },
     });
   };
@@ -71,7 +74,9 @@ function FormsDashboard() {
         setIsCreateModalOpen(false);
       },
       onError: (err) => {
-        setMutationError(err.message || "Failed to create form.");
+        setMutationError(
+          toFriendlyErrorMessage(err) || "Failed to create form.",
+        );
       },
     });
   };
@@ -141,7 +146,7 @@ function FormsDashboard() {
         forms={forms ?? []}
         isLoading={isLoading}
         isError={isError}
-        errorMessage={error?.message}
+        errorMessage={error ? toFriendlyErrorMessage(error) : undefined}
         onRetry={refetch}
         onDelete={triggerDeleteModal}
       />
@@ -159,7 +164,11 @@ function FormsDashboard() {
         isEditing={false}
         events={events}
         isPending={createMutation.isPending}
-        errorMessage={createMutation.error?.message ?? mutationError}
+        errorMessage={
+          createMutation.error
+            ? toFriendlyErrorMessage(createMutation.error)
+            : (mutationError ?? undefined)
+        }
         onClose={() => {
           setIsCreateModalOpen(false);
           setMutationError(null);

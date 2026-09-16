@@ -1,9 +1,9 @@
-import { useEffect, useState, type ChangeEvent, type SubmitEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { CgLock } from "react-icons/cg";
 import { LuMail, LuArrowLeft } from "react-icons/lu";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
-import { Link, useNavigate } from "react-router-dom";
-import { signIn } from "../lib/auth-client";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import { signIn, useSession } from "../lib/auth-client";
 
 type LoginCredentials = {
   email: string;
@@ -20,8 +20,13 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const { data: sessionData, isPending } = useSession();
 
-  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+  if (!isPending && sessionData?.session) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
@@ -33,10 +38,8 @@ function Login() {
       });
 
       if (response.error) {
-        console.error(response.error);
-        setErrorMessage(
-          response.error.message || "Unable to sign in. Please try again.",
-        );
+        // Generic message — never echo backend text (user-enumeration oracle).
+        setErrorMessage("Invalid email or password. Please try again.");
         return;
       }
       navigate("/dashboard", { replace: true });

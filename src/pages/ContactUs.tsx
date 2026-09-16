@@ -1,7 +1,19 @@
-import { ChangeEvent, SubmitEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useFeedbackMutation } from "../hooks";
 import { Section } from "../components";
 import { FaUser, FaEnvelope, FaPhone, FaCommentDots } from "react-icons/fa";
+import { toFriendlyErrorMessage } from "../lib/apiError";
+
+const MAX_NAME = 120;
+const MAX_EMAIL = 254;
+const MAX_PHONE = 30;
+const MAX_MESSAGE = 5000;
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +24,16 @@ const ContactUs = () => {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [validationError, setValidationError] = useState<string | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { mutate, isPending, error } = useFeedbackMutation();
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -25,24 +45,50 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setValidationError(null);
 
-    if (!formData.name || !formData.email || !formData.message) {
-      alert("Please fill in all required fields.");
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const phone = formData.phone.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
+      setValidationError("Please fill in all required fields.");
+      return;
+    }
+    if (
+      name.length > MAX_NAME ||
+      email.length > MAX_EMAIL ||
+      phone.length > MAX_PHONE ||
+      message.length > MAX_MESSAGE
+    ) {
+      setValidationError("One of the fields is too long.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setValidationError("Please enter a valid email address.");
+      return;
+    }
+    if (phone && !/^[+0-9][0-9\s-]*$/.test(phone)) {
+      setValidationError("Please enter a valid phone number.");
       return;
     }
 
-    mutate(formData, {
-      onSuccess: () => {
-        // TODO: we we implement feedback dashboard we will need ti invalidate the cache here after successful submission
-        setSuccessMessage("Your message has been sent successfully!");
-        setFormData({ name: "", email: "", phone: "", message: "" });
+    mutate(
+      { name, email, phone, message },
+      {
+        onSuccess: () => {
+          // TODO: we we implement feedback dashboard we will need ti invalidate the cache here after successful submission
+          setSuccessMessage("Your message has been sent successfully!");
+          setFormData({ name: "", email: "", phone: "", message: "" });
 
-        const timer = setTimeout(() => setSuccessMessage(""), 5000);
-        return () => clearTimeout(timer);
+          if (timerRef.current) clearTimeout(timerRef.current);
+          timerRef.current = setTimeout(() => setSuccessMessage(""), 5000);
+        },
       },
-    });
+    );
   };
 
   return (
@@ -71,6 +117,7 @@ const ContactUs = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Ahmed"
+                maxLength={MAX_NAME}
                 className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
                 required
               />
@@ -88,6 +135,7 @@ const ContactUs = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="mail@something.com"
+                maxLength={MAX_EMAIL}
                 className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
                 required
               />
@@ -105,6 +153,8 @@ const ContactUs = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="01234567890"
+                maxLength={MAX_PHONE}
+                pattern="[+0-9][0-9\s-]*"
                 className="p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D]"
               />
             </div>
@@ -122,6 +172,7 @@ const ContactUs = () => {
               value={formData.message}
               onChange={handleChange}
               placeholder="Write your message here..."
+              maxLength={MAX_MESSAGE}
               className="p-3 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#05568D] resize-none"
               required
             ></textarea>
@@ -129,9 +180,10 @@ const ContactUs = () => {
 
           {/* Status Notifications */}
           <div className="md:col-span-2 text-right">
-            {error && (
+            {(validationError || error) && (
               <p className="text-red-500 text-sm font-medium">
-                {error.message}
+                {validationError ??
+                  (error ? toFriendlyErrorMessage(error) : null)}
               </p>
             )}
             {successMessage && (
