@@ -6,6 +6,7 @@ export { default as CardSlider } from "./CardSlider";
 export { default as CloudinaryImage } from "./CloudinaryImage";
 export { default as Footer } from "./Footer";
 export { default as Navbar } from "./Navbar";
+export { default as PageFallback } from "./PageFallback";
 export { default as ProtectedRoute } from "./ProtectedRoute";
 export { default as ScrollToTop } from "./ScrollToTop";
 export { default as Section } from "./Section";
