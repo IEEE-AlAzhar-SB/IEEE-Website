@@ -7,7 +7,7 @@ import workshops from "../assets/about-img/workshops.svg";
 import since2018 from "../assets/about-img/sence2018.svg";
 
 import { useBoardQuery } from "../hooks";
-import { Section, CardSlider, Card } from "../components";
+import { Section, CardSlider, Card, Reveal } from "../components";
 import { selectMemberPosition } from "../utils/member.position";
 import { BoardMember } from "../types";
 
@@ -54,7 +54,7 @@ const About = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="space-y-4">
+        <Reveal className="space-y-4">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-extrabold gap-3">
             <span className="bg-red-600 text-white px-4 py-1.5 rounded-r-2xl text-sm sm:text-base tracking-wide shadow-sm">
               About IEEE
@@ -83,9 +83,9 @@ const About = () => {
               positively impact society.
             </p>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mt-16 lg:mt-24">
+        <Reveal className="mt-16 lg:mt-24">
           <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-12 items-center justify-between">
             <p className="w-full lg:w-1/2 text-gray-600 font-medium text-sm sm:text-base leading-8 text-justify">
               IEEE Al-Azhar SB operates under the IEEE Egypt Section,
@@ -103,9 +103,9 @@ const About = () => {
               />
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="bg-gradient-to-r from-[#05568D] to-[#033e66] rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl my-16 lg:my-24 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+        <Reveal className="bg-gradient-to-r from-[#05568D] to-[#033e66] rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl my-16 lg:my-24 flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
           <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold text-center lg:text-left lg:w-2/5 leading-snug">
             How a Passion for Technology Sparked a Movement
           </h2>
@@ -117,9 +117,9 @@ const About = () => {
             IEEE Egypt Section, nurtures future tech leaders and fosters a
             culture of creativity and excellence.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="my-12">
+        <Reveal className="my-12">
           <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-3 mb-12">
             <span className="bg-red-600 text-white px-4 py-1.5 rounded-r-2xl text-sm sm:text-base tracking-wide shadow-sm">
               What We've Accomplished
@@ -201,9 +201,9 @@ const About = () => {
               </p>
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mt-16 pt-6">
+        <Reveal className="mt-16 pt-6">
           {isLoading && <p>Loading...</p>}
           {error && <p className="text-red-600 font-bold">{error.message}</p>}
 
@@ -224,7 +224,7 @@ const About = () => {
           ) : !isLoading && !error ? (
             <p>No past chairmen data available.</p>
           ) : null}
-        </div>
+        </Reveal>
       </div>
     </div>
   );

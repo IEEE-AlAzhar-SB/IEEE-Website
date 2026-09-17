@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Section, CardLogo } from "../components";
+import { Section, CardLogo, Reveal } from "../components";
 import { useCommitteesQuery } from "../hooks";
 import { CommitteesType } from "../types";
 
@@ -31,7 +31,7 @@ const Committees = () => {
         additionalText="Committees working together to achieve our goals."
       />
 
-      <div className="container mx-auto px-4 sm:px-10 mb-6">
+      <Reveal className="container mx-auto px-4 sm:px-10 mb-6">
         {/* Tabs Control Wrapper */}
         <div className="px-10 pt-3 2xl:pt-16">
           <div className="flex flex-col sm:flex-row mx-auto items-center gap-2 sm:gap-4 bg-[#acabab30] p-1 rounded-2xl sm:rounded-full w-full sm:w-fit mb-4">
@@ -59,10 +59,10 @@ const Committees = () => {
             {COMMITTEE_TITLES[activeTab]}
           </span>
         </h2>
-      </div>
+      </Reveal>
 
       {/* Content Area */}
-      <div className="container mx-auto px-4 sm:px-10 mt-6 mb-12">
+      <Reveal className="container mx-auto px-4 sm:px-10 mt-6 mb-12">
         {committees && activeTab === "technical" && (
           <div className="flex flex-col gap-10">
             {Object.entries(committees.technical).map(([subSectionKey, cards]) => (
@@ -100,7 +100,7 @@ const Committees = () => {
             ))}
           </div>
         )}
-      </div>
+      </Reveal>
     </div>
   );
 };
