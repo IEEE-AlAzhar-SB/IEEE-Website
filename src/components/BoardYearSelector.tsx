@@ -78,7 +78,7 @@ const BoardYearSelector = ({
           id="board-year-select"
           value={selectedYear}
           onChange={(e) => onYearChange(e.target.value)}
-          className="appearance-none bg-white border border-gray-300 rounded-full py-1 pr-9 pl-3 text-sm font-medium text-gray-800 shadow-sm cursor-pointer transition duration-200hover:border-[#05568D] focus:outline-none focus:ring-2 focus:ring-[#05568D] focus:border-transparent"
+          className="appearance-none bg-white border border-gray-300 rounded-full py-1 pr-9 pl-3 text-sm font-medium text-gray-800 shadow-sm cursor-pointer transition duration-200 hover:border-[#05568D] focus:outline-none focus:ring-2 focus:ring-[#05568D] focus:border-transparent"
         >
           {years.map((year) => (
             <option key={year} value={year}>
