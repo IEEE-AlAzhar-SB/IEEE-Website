@@ -3,6 +3,32 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 import Logo from "../assets/logo.WebP";
+import { usePrefetchRoute } from "../hooks/usePrefetchRoute";
+
+const prefetchKeyForPath = {
+  "/": "home",
+  "/about": "about",
+  "/events": "events",
+  "/committees": "committees",
+  "/board": "board",
+};
+
+// Wrapper for the navLinks .map() loops below: keeps the usePrefetchRoute
+// call inside a real component (stable hook order) instead of in a loop.
+const MenuLink = ({ to, className, onClick, children }) => {
+  const prefetch = usePrefetchRoute(prefetchKeyForPath[to]);
+  return (
+    <Link
+      to={to}
+      viewTransition
+      {...prefetch}
+      className={className}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+};
 
 const navLinks = [
   { label: "Homepage", path: "/" },
@@ -15,6 +41,9 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const prefetchHome = usePrefetchRoute("home");
+  const prefetchContact = usePrefetchRoute("contactUs");
+  const prefetchLogin = usePrefetchRoute("login");
 
   const closeNavbar = () => setIsOpen(false);
   const isActive = (path) => location.pathname === path;
@@ -26,6 +55,8 @@ const Navbar = () => {
           {/*  Logo */}
           <Link
             to="/"
+            viewTransition
+            {...prefetchHome}
             className="flex-shrink-0 transition-transform duration-300 hover:scale-105"
           >
             <img
@@ -41,18 +72,20 @@ const Navbar = () => {
           </Link>
           <div className="hidden md:flex justify-center items-center gap-4 bg-slate-900/50 backdrop-blur-xl border border-white/10 p-1.5 rounded-full mx-auto shadow-lg">
             {navLinks.map((link) => (
-              <Link
+              <MenuLink
                 key={link.path}
                 to={link.path}
                 className={`font-semibold text-sm px-5 py-2 rounded-full transition-all duration-300 whitespace-nowrap ${isActive(link.path) ? "bg-white text-[#05568D] shadow-sm font-bold" : "text-white/90 hover:bg-white/20 hover:text-white"}`}
               >
                 {link.label}
-              </Link>
+              </MenuLink>
             ))}
           </div>
 
           <Link
             to="/contactus"
+            viewTransition
+            {...prefetchContact}
             className="hidden md:flex items-center gap-2.5 bg-white text-[#05568D] font-extrabold py-2 px-5 rounded-full transition-all duration-300 shadow-md hover:bg-[#05568D]/10 transform hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 group"
           >
             <span>Contact Us</span>
@@ -102,14 +135,14 @@ const Navbar = () => {
 
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
-              <Link
+              <MenuLink
                 key={link.path}
                 to={link.path}
                 className={`w-full py-3 px-4 rounded-xl text-sm font-bold transition-all duration-200 block ${isActive(link.path) ? "bg-white text-[#05568D] shadow-md" : "text-white/80 hover:bg-white/5 hover:text-white"}`}
                 onClick={closeNavbar}
               >
                 {link.label}
-              </Link>
+              </MenuLink>
             ))}
           </div>
         </div>
@@ -117,6 +150,8 @@ const Navbar = () => {
         <div className="space-y-3 pt-6 border-t border-white/10">
           <Link
             to="/contactus"
+            viewTransition
+            {...prefetchContact}
             className="flex items-center justify-center gap-2 bg-white text-[#05568D] font-black py-3 px-4 rounded-xl transition-all duration-300 w-full shadow-lg text-sm"
             onClick={closeNavbar}
           >
@@ -128,6 +163,8 @@ const Navbar = () => {
 
           <Link
             to="/login"
+            viewTransition
+            {...prefetchLogin}
             className={`w-full text-center py-2.5 text-xs rounded-lg border transition-all duration-200 block ${isActive("/login") ? "bg-red-500 text-white border-transparent" : "text-white/40 border-white/10 hover:text-white hover:bg-white/5"}`}
             onClick={closeNavbar}
           >
