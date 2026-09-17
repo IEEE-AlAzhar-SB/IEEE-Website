@@ -12,3 +12,26 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: 220ms ease-out both slide-fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 280ms ease-out both slide-fade-in;
+  }
+
+  @keyframes slide-fade-out {
+    to {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes slide-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}

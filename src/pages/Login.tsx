@@ -3,6 +3,7 @@ import { CgLock } from "react-icons/cg";
 import { LuMail, LuArrowLeft } from "react-icons/lu";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import { usePrefetchRoute } from "../hooks/usePrefetchRoute";
 import { signIn } from "../lib/auth-client";
 
 type LoginCredentials = {
@@ -20,6 +21,7 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
+  const prefetchHome = usePrefetchRoute("home");
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,6 +65,8 @@ function Login() {
 
         <Link
           to="/"
+          viewTransition
+          {...prefetchHome}
           className="flex items-center gap-2 text-white/80 hover:text-white transition w-max z-10 font-medium text-sm"
         >
           <LuArrowLeft size={16} />
@@ -179,6 +183,8 @@ function Login() {
           <div className="lg:hidden text-center pt-2">
             <Link
               to="/"
+              viewTransition
+              {...prefetchHome}
               className="text-xs text-white/80 hover:underline inline-flex items-center gap-1"
             >
               <LuArrowLeft size={12} /> Back to Homepage

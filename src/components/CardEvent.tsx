@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowUp } from "react-icons/fa";
+import { usePrefetchRoute } from "../hooks/usePrefetchRoute";
 
 interface CardProps {
   image: string;
@@ -29,6 +30,8 @@ const Card = ({
   id,
 }: CardProps) => {
   const detailsPath = slug ? `/events/${slug}` : `/eventdetails/${id}`;
+  // Same lazy chunk backs both /events/:slug and /eventdetails/:id.
+  const prefetchDetails = usePrefetchRoute("eventDetails");
   return (
     <div
       className={`group w-full h-full max-w-[650px] bg-white shadow-md hover:shadow-xl rounded-2xl p-4 md:p-5 flex flex-col gap-5 mx-auto transition-all duration-300 hover:-translate-y-1 ${className}`}
@@ -77,6 +80,8 @@ const Card = ({
         <div className="flex items-center gap-3">
           <Link
             to={detailsPath}
+            viewTransition
+            {...prefetchDetails}
             className="flex flex-1 justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-1.5 px-2.5 rounded-full transition-all duration-300 text-xs md:text-sm shadow-md shadow-[#05568D]/10 transform active:scale-95"
           >
             <span>Explore Event</span>
