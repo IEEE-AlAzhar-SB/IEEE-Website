@@ -1,6 +1,34 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import Logo from "../assets/logo.WebP";
 import { Link } from "react-router-dom";
+import { usePrefetchRoute } from "../hooks/usePrefetchRoute";
+
+// Wrapper for the footer nav .map() loop: keeps the usePrefetchRoute call
+// inside a real component (stable hook order) instead of in a loop.
+const FooterNavLink = ({ to, children }) => {
+  const prefetch = usePrefetchRoute(
+    (
+      {
+        "/": "home",
+        "/about": "about",
+        "/events": "events",
+        "/committees": "committees",
+        "/board": "board",
+        "/contactus": "contactUs",
+      }
+    )[to],
+  );
+  return (
+    <Link
+      to={to}
+      viewTransition
+      {...prefetch}
+      className="text-white/80 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1.5px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
+    >
+      {children}
+    </Link>
+  );
+};
 
 const Footer = () => {
   return (
@@ -24,13 +52,9 @@ const Footer = () => {
             { label: "Board", url: "/board" },
             { label: "Contact Us", url: "/contactus" },
           ].map((link, i) => (
-            <Link
-              key={i}
-              to={link.url}
-              className="text-white/80 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1.5px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
-            >
+            <FooterNavLink key={i} to={link.url}>
               {link.label}
-            </Link>
+            </FooterNavLink>
           ))}
         </div>
 

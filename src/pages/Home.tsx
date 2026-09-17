@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
 import { useBoardQuery, useEventsQuery, useHomeHeroImages } from "../hooks";
+import { usePrefetchRoute } from "../hooks/usePrefetchRoute";
 import { selectMemberPosition } from "../utils/member.position";
 import { CardSlider, CardEvent, CardLogo, Card, Reveal } from "../components";
 import { BoardMember } from "../types";
@@ -49,6 +50,10 @@ const Home = () => {
   const officers: BoardMember[] = data?.officer ?? [];
 
   const { data: events } = useEventsQuery();
+
+  const prefetchJoinUs = usePrefetchRoute("joinUs");
+  const prefetchAbout = usePrefetchRoute("about");
+  const prefetchCommittees = usePrefetchRoute("committees");
 
   // Avoid rebuilding card arrays (and remounting the Swiper) on every
   // parent render; dates are formatted once per events payload.
@@ -133,6 +138,8 @@ const Home = () => {
 
             <Link
               to="/joinus"
+              viewTransition
+              {...prefetchJoinUs}
               className="group flex items-center gap-3 bg-white hover:bg-[#05568D]/10 text-[#05568D] font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] w-max shadow-xl shadow-[#05568D]/20"
             >
               <span className="tracking-wide text-sm md:text-base">
@@ -209,6 +216,8 @@ const Home = () => {
             </p>
             <Link
               to="/about"
+              viewTransition
+              {...prefetchAbout}
               className="group inline-flex items-center gap-2.5 bg-[#05568D] hover:bg-[#033e66] text-white font-bold text-sm py-2.5 px-5 rounded-full transition-all duration-300 w-max shadow-md shadow-[#05568D]/20 transform hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="transition-colors">
@@ -265,6 +274,8 @@ const Home = () => {
 
             <Link
               to="/committees"
+              viewTransition
+              {...prefetchCommittees}
               className="group flex items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg shadow-[#05568D]/10 transform hover:scale-[1.02] w-max text-sm"
             >
               <span>Explore Committees</span>
