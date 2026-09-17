@@ -17,4 +17,5 @@ export {
   FeedbackFilterBarSkeleton,
 } from "./Skeletons";
 export { default as SideBarContent } from "./SideBarContent";
+export { Reveal } from "./Reveal";
 export * from "./ToastNotification";

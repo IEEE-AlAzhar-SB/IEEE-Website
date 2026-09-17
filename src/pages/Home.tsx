@@ -4,7 +4,7 @@ import { FaArrowUp } from "react-icons/fa";
 
 import { useBoardQuery, useEventsQuery, useHomeHeroImages } from "../hooks";
 import { selectMemberPosition } from "../utils/member.position";
-import { CardSlider, CardEvent, CardLogo, Card } from "../components";
+import { CardSlider, CardEvent, CardLogo, Card, Reveal } from "../components";
 import { BoardMember } from "../types";
 
 import Logo from "../assets/logo.WebP";
@@ -93,35 +93,6 @@ const Home = () => {
 
   return (
     <div className="overflow-x-hidden bg-slate-50/50">
-      {/* ستايل حقن الأنميشن المخصص للعناصر العائمة بشكل متداخل لضمان العمق الاحترافي */}
-      <style>{`
-        @keyframes hero-float-1 {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(-12px) scale(1.02); }
-        }
-        @keyframes hero-float-2 {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(12px) scale(0.98); }
-        }
-        @keyframes hero-float-3 {
-          0%, 100% { transform: translateX(0px) translateY(0px); }
-          50% { transform: translateX(10px) translateY(-8px); }
-        }
-        @keyframes bg-bubble-1 {
-          0%, 100% { transform: translateY(0px) rotate(43deg); }
-          50% { transform: translateY(-20px) rotate(45deg); }
-        }
-        @keyframes bg-bubble-2 {
-          0%, 100% { transform: translateY(0px) rotate(151deg); }
-          50% { transform: translateY(20px) rotate(149deg); }
-        }
-        .animate-hero-1 { animation: hero-float-1 5s ease-in-out infinite; }
-        .animate-hero-2 { animation: hero-float-2 6s ease-in-out infinite; }
-        .animate-hero-3 { animation: hero-float-3 7s ease-in-out infinite; }
-        .animate-bg-bubble-1 { animation: bg-bubble-1 9s ease-in-out infinite; }
-        .animate-bg-bubble-2 { animation: bg-bubble-2 11s ease-in-out infinite; }
-      `}</style>
-
       <div
         className="text-white pt-10 pb-16 z-5 relative overflow-hidden"
         style={{
@@ -203,7 +174,7 @@ const Home = () => {
       </div>
 
       {/*  Discover Section */}
-      <div className="px-6 md:px-12 py-16 container mx-auto space-y-12">
+      <Reveal className="px-6 md:px-12 py-16 container mx-auto space-y-12">
         <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3 leading-snug">
           <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-xl rounded-br-xl shadow-md shadow-red-600/10 whitespace-nowrap">
             Discover IEEE Al-Azhar SB
@@ -249,26 +220,29 @@ const Home = () => {
             </Link>
           </div>
         </div>
+      </Reveal>
 
-        {/*  Events Title */}
-        <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3 pt-6">
-          <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-xl rounded-br-xl shadow-md shadow-red-600/10 whitespace-nowrap">
-            Our Events
-          </span>
-          <span className="text-slate-800 font-bold tracking-tight">
-            Stay Connected with the Latest Conferences, Workshops, and
-            Competitions
-          </span>
-        </h2>
-      </div>
+      {/*  Events Title + Slider */}
+      <Reveal className="container mx-auto">
+        <div className="px-6 md:px-12">
+          <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3 pt-6">
+            <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-xl rounded-br-xl shadow-md shadow-red-600/10 whitespace-nowrap">
+              Our Events
+            </span>
+            <span className="text-slate-800 font-bold tracking-tight">
+              Stay Connected with the Latest Conferences, Workshops, and
+              Competitions
+            </span>
+          </h2>
+        </div>
 
-      {/*  Events Slider Container */}
-      <div className="mt-2 mb-12 container mx-auto">
-        {events && <CardSlider cards={eventCards} />}
-      </div>
+        <div className="mt-2 mb-12">
+          {events && <CardSlider cards={eventCards} />}
+        </div>
+      </Reveal>
 
       {/*  Committees Section */}
-      <section className="w-full px-6 md:px-12 py-16 container mx-auto space-y-8">
+      <Reveal className="w-full px-6 md:px-12 py-16 container mx-auto space-y-8">
         <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3">
           <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-xl rounded-br-xl shadow-md shadow-red-600/10 whitespace-nowrap">
             Our Committees
@@ -315,23 +289,25 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/*  Our Team Section */}
-      <div className="px-6 pt-8 container mx-auto">
-        <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3">
-          <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-full rounded-br-full shadow-md shadow-red-600/10 whitespace-nowrap">
-            Our Team
-          </span>
-          <span className="text-slate-800 font-bold tracking-tight">
-            The Heart of IEEE Al-Azhar SB: Talented Individuals, Shared Goals
-          </span>
-        </h2>
-      </div>
+      <Reveal className="container mx-auto">
+        <div className="px-6 pt-8">
+          <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-base sm:text-xl lg:text-2xl gap-3">
+            <span className="font-extrabold bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 py-2 rounded-tr-full rounded-br-full shadow-md shadow-red-600/10 whitespace-nowrap">
+              Our Team
+            </span>
+            <span className="text-slate-800 font-bold tracking-tight">
+              The Heart of IEEE Al-Azhar SB: Talented Individuals, Shared Goals
+            </span>
+          </h2>
+        </div>
 
-      <div className="mt-6 mb-16 mx-auto container">
-        <CardSlider cards={officerCards} />
-      </div>
+        <div className="mt-6 mb-16">
+          <CardSlider cards={officerCards} />
+        </div>
+      </Reveal>
     </div>
   );
 };
