@@ -27,7 +27,9 @@ function toSafePublicId(raw: string): string | null {
   ) {
     return null;
   }
-  return encodeURIComponent(id);
+  // Encode per path segment so folder public IDs (e.g. "board/2024/x")
+  // keep their "/" separators instead of breaking into "%2F".
+  return id.split("/").map(encodeURIComponent).join("/");
 }
 
 const CloudinaryImage = ({
