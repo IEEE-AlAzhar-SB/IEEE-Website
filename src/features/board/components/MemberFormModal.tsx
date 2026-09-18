@@ -83,7 +83,7 @@ const MemberFormModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999999] flex items-center justify-center p-4">
-      <div className="bg-[#05568D] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#1E293B] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6 pb-2 border-b border-slate-700">
           <h3 className="text-lg font-bold text-white">
             {isEditing ? "Edit Board Member" : "Add New Council Member"}
@@ -108,7 +108,7 @@ const MemberFormModal = ({
                 required
                 value={currentMember.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
+                className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
                 placeholder="e.g. Mahmoud Ahmed"
               />
             </div>
@@ -124,7 +124,7 @@ const MemberFormModal = ({
                 type="email"
                 value={currentMember.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
+                className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
                 placeholder="test@example.com"
               />
             </div>
@@ -142,7 +142,7 @@ const MemberFormModal = ({
                 id="memberType"
                 value={currentMember.memberType}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D] capitalize"
+                className="w-full px-3 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 capitalize"
               >
                 {memberTypes.map((type) => (
                   <option key={type} value={type}>
@@ -164,7 +164,7 @@ const MemberFormModal = ({
                 required
                 value={currentMember.boardYear}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
+                className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
               />
             </div>
           </div>
@@ -181,7 +181,7 @@ const MemberFormModal = ({
                 id="position"
                 value={currentMember.position}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D] capitalize"
+                className="w-full px-3 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 capitalize"
               >
                 {allowedPositions.map((pos) => (
                   <option key={pos} value={pos}>
@@ -203,7 +203,7 @@ const MemberFormModal = ({
                     id="track"
                     value={currentMember.track}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D] capitalize"
+                    className="w-full px-3 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 capitalize"
                   >
                     <option value="">Select a track</option>
                     {currentMember.memberType === "technical" && trackGroups
@@ -228,7 +228,7 @@ const MemberFormModal = ({
                     type="text"
                     value={currentMember.track}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
+                    className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
                     placeholder="e.g. Front End"
                   />
                 )}
@@ -248,7 +248,7 @@ const MemberFormModal = ({
                 id="gender"
                 value={currentMember.gender}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D] capitalize"
+                className="w-full px-3 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 capitalize"
               >
                 {genders.map((gender) => (
                   <option key={gender} value={gender}>
@@ -269,7 +269,7 @@ const MemberFormModal = ({
                 type="url"
                 value={currentMember.linkedin_url}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D]"
+                className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500"
                 placeholder="https://linkedin.com/..."
               />
             </div>
@@ -287,7 +287,7 @@ const MemberFormModal = ({
               rows={3}
               value={currentMember.bio}
               onChange={handleInputChange}
-              className="w-full px-4 py-2.5 bg-[#033e66] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-[#05568D] resize-none"
+              className="w-full px-4 py-2.5 bg-[#0F172A] border border-slate-600 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
               placeholder="Short biography..."
             />
           </div>
@@ -297,7 +297,7 @@ const MemberFormModal = ({
               Avatar Image
             </label>
             <div
-              className="border border-dashed border-slate-600 rounded-xl p-4 text-center cursor-pointer text-xs text-slate-300 flex flex-col items-center justify-center gap-2 bg-[#033e66] hover:bg-slate-800 transition"
+              className="border border-dashed border-slate-600 rounded-xl p-4 text-center cursor-pointer text-xs text-slate-300 flex flex-col items-center justify-center gap-2 bg-[#0F172A] hover:bg-slate-800 transition"
               onClick={() => document.getElementById("file-input")?.click()}
             >
               <FiImage size={24} className="text-slate-500" />
@@ -335,7 +335,7 @@ const MemberFormModal = ({
             <button
               type="submit"
               disabled={isPending}
-              className="px-5 py-2 bg-white text-[#05568D] rounded-xl text-sm font-semibold hover:bg-white/90 shadow-lg shadow-black/20 transition disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-500 shadow-lg shadow-blue-500/10 transition disabled:opacity-50 flex items-center gap-2"
             >
               {isPending ? "Saving..." : "Save Changes"}
             </button>

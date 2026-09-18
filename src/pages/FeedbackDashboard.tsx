@@ -43,7 +43,7 @@ function FeedbackDashboard() {
     <main className="p-4 md:p-10 max-w-7xl mx-auto w-full space-y-8 animate-in fade-in duration-200">
       <header className="pb-4 border-b border-slate-800">
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
-          <LuMessageSquare className="text-white" size={28} /> Users Feedback
+          <LuMessageSquare className="text-blue-500" size={28} /> Users Feedback
         </h1>
         <p className="text-slate-400 text-sm mt-1">
           Review, analyze and manage the suggestions and inquiries submitted by
@@ -90,7 +90,7 @@ function FeedbackDashboard() {
         )}
 
         {!isLoading && filteredFeedbacks.length === 0 && (
-          <div className="bg-[#05568D] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
+          <div className="bg-[#1E293B] rounded-2xl p-12 text-center border border-slate-800 text-slate-500">
             No feedback found matching the criteria.
           </div>
         )}
