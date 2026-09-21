@@ -170,40 +170,42 @@ const EventDetails = () => {
                 </div>
               )}
               {showVenue && (
-                <div className="flex items-start gap-3">
-                  <FaMapMarkerAlt className="text-[#05568D] text-xl flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="font-bold text-[#1A1A1A] text-base">
-                      Location
-                    </h3>
-                    {event.venueDetails?.note ? (
-                      <p dir="rtl" className="text-slate-600 text-sm mt-1">
-                        {event.venueDetails.note}
-                      </p>
-                    ) : (
-                      event.location && (
-                        <p className="text-slate-600 text-sm mt-1 capitalize">
-                          {event.location}
+                <div className="flex flex-col md:flex-row justify-between gap-3">
+                  <div className="flex items-start gap-3">
+                    <FaMapMarkerAlt className="text-[#05568D] text-xl flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="font-bold text-[#1A1A1A] text-base">
+                        Location
+                      </h3>
+                      {event.venueDetails?.note ? (
+                        <p dir="rtl" className="text-slate-600 text-sm mt-1">
+                          {event.venueDetails.note}
                         </p>
-                      )
-                    )}
+                      ) : (
+                        event.location && (
+                          <p className="text-slate-600 text-sm mt-1 capitalize">
+                            {event.location}
+                          </p>
+                        )
+                      )}
+                    </div>
                   </div>
+                  {safeMapLink && (
+                    <a
+                      href={safeMapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+                    >
+                      <span>Get Directions</span>
+                      <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
+                        <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
+                      </span>
+                    </a>
+                  )}
                 </div>
               )}
             </div>
-            {safeMapLink && (
-              <a
-                href={safeMapLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
-              >
-                <span>Get Directions</span>
-                <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
-                  <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
-                </span>
-              </a>
-            )}
           </div>
         )}
 
