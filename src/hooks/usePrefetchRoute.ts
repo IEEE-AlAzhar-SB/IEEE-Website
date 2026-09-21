@@ -1,12 +1,12 @@
 import { routeImports } from "../routeImports";
 
-export function usePrefetchRoute(key: keyof typeof routeImports) {
+export function usePrefetchRoute(key: keyof typeof routeImports | undefined) {
   return {
     onMouseEnter: () => {
-      routeImports[key]();
+      if (key) routeImports[key]();
     },
     onFocus: () => {
-      routeImports[key]();
+      if (key) routeImports[key]();
     },
   };
 }

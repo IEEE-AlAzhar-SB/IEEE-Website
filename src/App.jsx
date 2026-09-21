@@ -24,6 +24,7 @@ const ContactUs = lazy(routeImports.contactUs);
 const JoinUs = lazy(routeImports.joinUs);
 const Login = lazy(routeImports.login);
 const Dashboard = lazy(routeImports.dashboard);
+const NotFound = lazy(routeImports.notFound);
 
 function App() {
   return (
@@ -41,8 +42,8 @@ function App() {
           <Route path="eventdetails/:id" element={<EventDetails />} />
           <Route path="contactus" element={<ContactUs />} />
           <Route path="joinus" element={<JoinUs />} />
-          {/* Unknown URLs keep the old shell: Navbar/Footer with empty content. */}
-          <Route path="*" element={null} />
+          {/* Unknown URLs render NotFound inside the public shell. */}
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         <Route
