@@ -240,8 +240,8 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#033e66] text-slate-100 font-sans flex relative">
-      <aside className="w-64 bg-[#05568D] border-r border-slate-700/50 p-6 hidden md:block shrink-0 h-screen sticky top-0">
+    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans flex relative">
+      <aside className="w-64 bg-[#1E293B] border-r border-slate-700/50 p-6 hidden md:block shrink-0 h-screen sticky top-0">
         <SideBarContent
           sideBarOnclick={() => setIsMobileMenuOpen(false)}
           handleLogOut={handleLogout}
@@ -256,7 +256,7 @@ function Dashboard() {
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <aside className="relative w-64 bg-[#05568D] border-r border-slate-700 h-full p-6 flex flex-col animate-in slide-in-from-left duration-200">
+          <aside className="relative w-64 bg-[#1E293B] border-r border-slate-700 h-full p-6 flex flex-col animate-in slide-in-from-left duration-200">
             <SideBarContent
               sideBarOnclick={() => setIsMobileMenuOpen(false)}
               handleLogOut={handleLogout}
@@ -266,13 +266,13 @@ function Dashboard() {
       )}
 
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="md:hidden flex items-center justify-between p-4 bg-[#05568D] border-b border-slate-700/50">
+        <div className="md:hidden flex items-center justify-between p-4 bg-[#1E293B] border-b border-slate-700/50">
           <div className="flex items-center gap-2">
-            <LuShieldCheck className="text-white" size={20} />
+            <LuShieldCheck className="text-blue-500" size={20} />
             <span className="font-bold text-xs text-white">IEEE Panel</span>
           </div>
           <button
-            className="p-2 text-slate-400 hover:text-white bg-[#033e66] rounded-lg"
+            className="p-2 text-slate-400 hover:text-white bg-[#0F172A] rounded-lg"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <LuMenu size={20} />
@@ -297,7 +297,7 @@ function Dashboard() {
                     </div>
                     <button
                       onClick={openAddModal}
-                      className="bg-white hover:bg-white/90 text-[#05568D] font-semibold py-2.5 px-4 rounded-xl shadow-lg shadow-black/20 transition flex items-center justify-center gap-2 text-sm self-start sm:self-auto"
+                      className="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg shadow-blue-500/10 transition flex items-center justify-center gap-2 text-sm self-start sm:self-auto"
                     >
                       <GoPlus size={16} /> Add Member
                     </button>
