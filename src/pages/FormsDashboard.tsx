@@ -86,7 +86,7 @@ function FormsDashboard() {
       label: "Total Forms",
       count: totalCount,
       Icon: LuFileText,
-      color: "text-white",
+      color: "text-blue-500",
     },
     {
       label: "Active",
@@ -113,7 +113,7 @@ function FormsDashboard() {
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-800 gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
-            <LuFileText className="text-white" size={28} /> Form Builder
+            <LuFileText className="text-blue-500" size={28} /> Form Builder
           </h1>
           <p className="text-slate-400 text-sm mt-1">
             Create and manage dynamic registration forms for events.
@@ -121,7 +121,7 @@ function FormsDashboard() {
         </div>
         <button
           onClick={() => setIsCreateModalOpen(true)}
-          className="bg-white hover:bg-white/90 text-[#05568D] font-semibold py-2.5 px-4 rounded-xl shadow-lg shadow-black/20 transition flex items-center justify-center gap-2 text-sm"
+          className="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg shadow-blue-500/10 transition flex items-center justify-center gap-2 text-sm"
         >
           <GoPlus size={18} /> New Form
         </button>
@@ -131,7 +131,7 @@ function FormsDashboard() {
         {stats.map(({ label, count, Icon, color }) => (
           <div
             key={label}
-            className="bg-[#05568D] p-5 rounded-2xl border border-slate-700/50 flex items-center gap-4"
+            className="bg-[#1E293B] p-5 rounded-2xl border border-slate-700/50 flex items-center gap-4"
           >
             <Icon className={color} size={28} />
             <div>
