@@ -11,3 +11,4 @@ export { default as FormDetailDashboard } from "./FormDetailDashboard";
 export { default as Home } from "./Home";
 export { default as JoinUs } from "./JoinUs";
 export { default as Login } from "./Login";
+export { default as NotFound } from "./NotFound";

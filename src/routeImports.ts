@@ -13,4 +13,5 @@ export const routeImports = {
   joinUs: () => import("./pages/JoinUs"),
   login: () => import("./pages/Login"),
   dashboard: () => import("./pages/Dashboard"),
+  notFound: () => import("./pages/NotFound"),
 } as const;
