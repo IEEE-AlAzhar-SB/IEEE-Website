@@ -46,15 +46,11 @@ const EventDetails = () => {
   const idQuery = useEventByIdQuery(id ?? "", {
     enabled: isLegacyRoute && !!id,
   });
-  const { data: event, isLoading, error } = isLegacyRoute
-    ? idQuery
-    : slugQuery;
+  const { data: event, isLoading, error } = isLegacyRoute ? idQuery : slugQuery;
 
   // Legacy UUID URLs redirect to the canonical slug URL once loaded.
   // Slug is allowlisted before navigation to avoid API-driven open redirect.
-  const redirectSlug = isLegacyRoute
-    ? idQuery.data?.slug?.current
-    : undefined;
+  const redirectSlug = isLegacyRoute ? idQuery.data?.slug?.current : undefined;
   const safeRedirectSlug =
     redirectSlug && isSafeSlug(redirectSlug) ? redirectSlug : undefined;
   useEffect(() => {
@@ -125,154 +121,154 @@ const EventDetails = () => {
       </section>
 
       <div className="container mx-auto px-4 sm:px-6">
-      <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
-        <h2 className="flex flex-col items-start gap-2">
-          <span
-            className={`w-fit bg-[#05568D] text-white px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
-          >
-            {event.title}
-          </span>
-          <span className="text-[#1A1A1A] text-sm sm:text-base md:text-lg font-semibold">
-            {event.subtitle}
-          </span>
-        </h2>
-      </div>
-
-      {showInfoCard && (
-        <div className="my-6 flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-5 shadow-sm">
-          <div className="flex flex-col gap-4 flex-1">
-            {showVenue && (
-              <div className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-[#05568D] text-xl flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-bold text-[#1A1A1A] text-base">
-                    Location
-                  </h3>
-                  {event.venueDetails?.note ? (
-                    <p dir="rtl" className="text-slate-600 text-sm mt-1">
-                      {event.venueDetails.note}
-                    </p>
-                  ) : (
-                    event.location && (
-                      <p className="text-slate-600 text-sm mt-1 capitalize">
-                        {event.location}
-                      </p>
-                    )
-                  )}
-                </div>
-              </div>
-            )}
-            {(primaryDateTime || secondDateTime) && (
-              <div className="border-t border-gray-100 pt-4 flex flex-col gap-2">
-                {primaryDateTime && (
-                  <div className="flex items-start gap-3">
-                    <FaCalendarAlt className="text-[#05568D] text-lg flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h3 className="font-bold text-[#1A1A1A] text-base">
-                        Date & Time
-                      </h3>
-                      <p className="flex items-center gap-1.5 text-slate-600 text-sm mt-1">
-                        <FaClock className="text-slate-400 text-xs flex-shrink-0" />
-                        {primaryDateTime}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {secondDateTime && (
-                  <div className="flex items-start gap-3">
-                    <FaCalendarAlt className="text-[#05568D] text-lg flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h3 className="font-bold text-[#1A1A1A] text-base">
-                        Session 2
-                      </h3>
-                      <p className="flex items-center gap-1.5 text-slate-600 text-sm mt-1">
-                        <FaClock className="text-slate-400 text-xs flex-shrink-0" />
-                        {secondDateTime}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-          {safeMapLink && (
-            <a
-              href={safeMapLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+        <div className="px-4 sm:px-6 py-6 relative top-[-45px] bg-white rounded-2xl shadow-md">
+          <h2 className="flex flex-col items-start gap-2">
+            <span
+              className={`w-fit bg-[#05568D] text-white px-3 py-1 rounded-tr-2xl rounded-br-2xl text-base sm:text-lg md:text-xl font-bold`}
             >
-              <span>Get Directions</span>
-              <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
-                <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
-              </span>
-            </a>
-          )}
-        </div>
-      )}
-
-      {event.speakers && event.speakers.length > 0 && (
-        <div className="my-10">
-          <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
-            <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
-              Our Speaker
+              {event.title}
             </span>
-            <span className="text-[#1A1A1A]">
-              Gain valuable knowledge from the brightest minds in tech and
-              engineering.
-            </span>
-          </h2>{" "}
-          <CardSlider
-            cards={event.speakers.map((speaker, index) => (
-              <Card
-                key={`${index}-${speaker.title}`}
-                title={speaker.title}
-                name={speaker.name}
-                text={""}
-                imageSrc={speaker.photo?.asset.url ?? ""}
-              />
-            ))}
-          />
-        </div>
-      )}
-      {event.memories && event.memories.length > 0 && (
-        <div className="my-10">
-          <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
-            <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
-              Moments That Inspire
-            </span>
-            <span className="text-[#1A1A1A]">
-              Capturing the highlights of our innovative and collaborative
-              events.
+            <span className="text-[#1A1A1A] text-sm sm:text-base md:text-lg font-semibold">
+              {event.subtitle}
             </span>
           </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {event.memories.map((memory, index) => {
-              const src = toSafeImageSrc(memory.photo.asset?.url);
-              if (!src) return null;
-              return (
-                <img
-                  key={`${index}-${src}`}
-                  src={src}
-                alt={`Memory ${index + 1}`}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-64 object-cover rounded-lg shadow-md"
-                />
-              );
-            })}
-          </div>
         </div>
-      )}
 
-      {event.formSlug ? (
-        <EventFormSection formSlug={event.formSlug} />
-      ) : (
-        safeRegistrationLink && (
-          <ExternalRegisterSection link={safeRegistrationLink} />
-        )
-      )}
+        {showInfoCard && (
+          <div className="my-6 flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="flex flex-col gap-4 flex-1">
+              {(primaryDateTime || secondDateTime) && (
+                <div className="border-t border-gray-100 pt-4 flex flex-col gap-2">
+                  {primaryDateTime && (
+                    <div className="flex items-start gap-3">
+                      <FaCalendarAlt className="text-[#05568D] text-lg flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="font-bold text-[#1A1A1A] text-base">
+                          Date & Time
+                        </h3>
+                        <p className="flex items-center gap-1.5 text-slate-600 text-sm mt-1">
+                          <FaClock className="text-slate-400 text-xs flex-shrink-0" />
+                          {primaryDateTime}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  {secondDateTime && (
+                    <div className="flex items-start gap-3">
+                      <FaCalendarAlt className="text-[#05568D] text-lg flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="font-bold text-[#1A1A1A] text-base">
+                          Session 2
+                        </h3>
+                        <p className="flex items-center gap-1.5 text-slate-600 text-sm mt-1">
+                          <FaClock className="text-slate-400 text-xs flex-shrink-0" />
+                          {secondDateTime}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+              {showVenue && (
+                <div className="flex items-start gap-3">
+                  <FaMapMarkerAlt className="text-[#05568D] text-xl flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-bold text-[#1A1A1A] text-base">
+                      Location
+                    </h3>
+                    {event.venueDetails?.note ? (
+                      <p dir="rtl" className="text-slate-600 text-sm mt-1">
+                        {event.venueDetails.note}
+                      </p>
+                    ) : (
+                      event.location && (
+                        <p className="text-slate-600 text-sm mt-1 capitalize">
+                          {event.location}
+                        </p>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+            {safeMapLink && (
+              <a
+                href={safeMapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center gap-3 bg-[#05568D] hover:bg-[#033e66] text-white font-bold py-2.5 px-4 rounded-full transition-all duration-300 shadow-md active:scale-95 w-full sm:w-auto"
+              >
+                <span>Get Directions</span>
+                <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded-full bg-white">
+                  <FaArrowUp className="text-[#05568D] transform rotate-45 text-[10px] md:text-xs" />
+                </span>
+              </a>
+            )}
+          </div>
+        )}
+
+        {event.speakers && event.speakers.length > 0 && (
+          <div className="my-10">
+            <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
+              <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
+                Our Speaker
+              </span>
+              <span className="text-[#1A1A1A]">
+                Gain valuable knowledge from the brightest minds in tech and
+                engineering.
+              </span>
+            </h2>{" "}
+            <CardSlider
+              cards={event.speakers.map((speaker, index) => (
+                <Card
+                  key={`${index}-${speaker.title}`}
+                  title={speaker.title}
+                  name={speaker.name}
+                  text={""}
+                  imageSrc={speaker.photo?.asset.url ?? ""}
+                />
+              ))}
+            />
+          </div>
+        )}
+        {event.memories && event.memories.length > 0 && (
+          <div className="my-10">
+            <h2 className="flex flex-col sm:flex-row items-start sm:items-center text-lg sm:text-2xl font-bold gap-2 mb-8">
+              <span className="bg-red-600 text-white px-2 py-1 rounded-tr-2xl rounded-br-2xl">
+                Moments That Inspire
+              </span>
+              <span className="text-[#1A1A1A]">
+                Capturing the highlights of our innovative and collaborative
+                events.
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {event.memories.map((memory, index) => {
+                const src = toSafeImageSrc(memory.photo.asset?.url);
+                if (!src) return null;
+                return (
+                  <img
+                    key={`${index}-${src}`}
+                    src={src}
+                    alt={`Memory ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-64 object-cover rounded-lg shadow-md"
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {event.formSlug ? (
+          <EventFormSection formSlug={event.formSlug} />
+        ) : (
+          safeRegistrationLink && (
+            <ExternalRegisterSection link={safeRegistrationLink} />
+          )
+        )}
       </div>
     </div>
   );
