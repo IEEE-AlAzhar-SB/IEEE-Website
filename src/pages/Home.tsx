@@ -140,7 +140,7 @@ const Home = () => {
               to="/joinus"
               viewTransition
               {...prefetchJoinUs}
-              className="group flex items-center gap-3 bg-white hover:bg-[#05568D]/10 text-[#05568D] font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] w-max shadow-xl shadow-[#05568D]/20"
+              className="group flex items-center gap-3 bg-white hover:bg-slate-100 text-[#05568D] hover:text-[#033e66] font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] w-max shadow-xl shadow-[#05568D]/20"
             >
               <span className="tracking-wide text-sm md:text-base">
                 Join Us

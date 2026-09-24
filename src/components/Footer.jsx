@@ -63,18 +63,20 @@ const Footer = () => {
             {
               icon: FaFacebookF,
               url: "https://www.facebook.com/share/1A7kWQHZ4e/",
-              hoverBg: "hover:bg-[#05568D] hover:text-white",
+              hoverBg:
+                "hover:bg-slate-100 hover:text-[#033e66] hover:shadow-lg",
             },
             {
               icon: FaInstagram,
               url: "https://www.instagram.com/ieee.alazhar?igsh=MTAwN2tmd2doNG44NA==",
               hoverBg:
-                "hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:to-[#ee2a7b] hover:text-white",
+                "hover:bg-slate-100 hover:text-[#033e66] hover:shadow-lg",
             },
             {
               icon: FaLinkedinIn,
               url: "https://www.linkedin.com/company/ieee-alazhar/",
-              hoverBg: "hover:bg-[#05568D] hover:text-white",
+              hoverBg:
+                "hover:bg-slate-100 hover:text-[#033e66] hover:shadow-lg",
             },
           ].map(({ icon: Icon, url, hoverBg }, i) => (
             <a
@@ -121,7 +123,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="w-full sm:w-auto whitespace-nowrap bg-white text-[#05568D] font-bold px-6 py-3 rounded-full hover:bg-[#05568D]/10 transition transform active:scale-95 text-sm shadow-md shadow-[#05568D]/10"
+              className="w-full sm:w-auto whitespace-nowrap bg-white text-[#05568D] font-bold px-6 py-3 rounded-full hover:bg-slate-100 hover:text-[#033e66] hover:shadow-lg transition transform active:scale-95 text-sm shadow-md shadow-[#05568D]/10"
             >
               Subscribe to news
             </button>

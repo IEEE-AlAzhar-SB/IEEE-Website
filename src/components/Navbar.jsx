@@ -86,10 +86,10 @@ const Navbar = () => {
             to="/contactus"
             viewTransition
             {...prefetchContact}
-            className="hidden md:flex items-center gap-2.5 bg-white text-[#05568D] font-extrabold py-2 px-5 rounded-full transition-all duration-300 shadow-md hover:bg-[#05568D]/10 transform hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 group"
+            className="hidden md:flex items-center gap-2.5 bg-white text-[#05568D] font-extrabold py-2 px-5 rounded-full transition-all duration-300 shadow-md hover:bg-slate-100 hover:text-[#033e66] hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 flex-shrink-0 group"
           >
             <span>Contact Us</span>
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#05568D] transition-transform group-hover:rotate-45 duration-300">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-[#033e66] transition-all group-hover:rotate-45 duration-300">
               <FaArrowUp className="text-white text-[10px] transform rotate-45" />
             </span>
           </Link>
@@ -152,11 +152,11 @@ const Navbar = () => {
             to="/contactus"
             viewTransition
             {...prefetchContact}
-            className="flex items-center justify-center gap-2 bg-white text-[#05568D] font-black py-3 px-4 rounded-xl transition-all duration-300 w-full shadow-lg text-sm"
+            className="group flex items-center justify-center gap-2 bg-white text-[#05568D] font-black py-3 px-4 rounded-xl transition-all duration-300 w-full shadow-lg hover:bg-slate-100 hover:text-[#033e66] text-sm"
             onClick={closeNavbar}
           >
             <span>Contact Us</span>
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#05568D]">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#05568D] group-hover:bg-[#033e66] transition-colors">
               <FaArrowUp className="text-white text-[10px] transform rotate-90" />
             </span>
           </Link>
