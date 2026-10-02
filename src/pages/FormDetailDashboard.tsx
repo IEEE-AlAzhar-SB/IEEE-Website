@@ -73,7 +73,7 @@ function FormDetailDashboard() {
     data: submissionsData,
     isLoading: submissionsLoading,
     isError: submissionsError,
-  } = useSubmissionsQuery(slug ?? "", submissionsPage);
+  } = useSubmissionsQuery(slug ?? "", submissionsPage, 5);
 
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [settingsError, setSettingsError] = useState<string | null>(null);
